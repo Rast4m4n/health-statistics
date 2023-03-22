@@ -31,4 +31,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <!-- Обязательные пермишоны для работы с Fitnes API Google Fit -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 </manifest>
