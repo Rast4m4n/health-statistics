@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:health_statistics/ui/pages/home_view_model.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
 import 'package:health_statistics/ui/themes/app_theme.dart';
 import 'package:health_statistics/ui/widgets/health_card.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({
+  HomePage({
     super.key,
   });
-
+  final vm = HomeViewModel();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,28 +26,33 @@ class HomePage extends StatelessWidget {
                     ),
               ),
               const SizedBox(height: AppPaddings.hight),
-              Wrap(
-                alignment: WrapAlignment.spaceBetween,
-                spacing: AppPaddings.hight + AppPaddings.low,
-                runSpacing: AppPaddings.hight,
-                children: const [
-                  HealthCard(
-                    title: 'Шаги',
-                    statistic: '25461 шаг',
-                    color: HealthCardColors.step,
-                  ),
-                  HealthCard(
-                    title: 'Активность',
-                    statistic: '22 м. 56 с. ходьбы',
-                    color: HealthCardColors.activity,
-                  ),
-                  HealthCard(
-                    title: 'Расход энергии',
-                    statistic: '1482 калорий потрачено',
-                    color: HealthCardColors.energyConsumption,
-                    isFullWidth: true,
-                  ),
-                ],
+              FutureBuilder(
+                future: vm.fetchDataHealth(),
+                builder: (context, snapshot) {
+                  return Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    spacing: AppPaddings.hight + AppPaddings.low,
+                    runSpacing: AppPaddings.hight,
+                    children: [
+                      HealthCard(
+                        title: 'Шаги',
+                        statistic: '${vm.steps} шагов',
+                        color: HealthCardColors.step,
+                      ),
+                      const HealthCard(
+                        title: 'Активность',
+                        statistic: '--- минут',
+                        color: HealthCardColors.activity,
+                      ),
+                      HealthCard(
+                        title: 'Расход энергии',
+                        statistic: '${vm.eneregyBurned} калорий потрачено',
+                        color: HealthCardColors.energyConsumption,
+                        isFullWidth: true,
+                      ),
+                    ],
+                  );
+                },
               ),
               const SizedBox(height: AppPaddings.low),
             ],

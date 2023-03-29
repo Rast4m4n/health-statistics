@@ -9,6 +9,6 @@ class AppNavigation {
   String get initialRoute => AppRoute.home;
 
   Map<String, Widget Function(BuildContext)> get routes => {
-        AppRoute.home: (context) => const HomePage(),
+        AppRoute.home: (context) => HomePage(),
       };
 }
