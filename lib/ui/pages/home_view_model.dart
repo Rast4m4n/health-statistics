@@ -6,12 +6,12 @@ class HomeViewModel {
   List<HealthDataPoint> healthData = [];
   int steps = 0;
   int eneregyBurned = 0;
+  int moveMinutes = 0;
   final HealthFactory health = HealthFactory();
 
   final _types = [
     HealthDataType.STEPS,
     HealthDataType.MOVE_MINUTES,
-    HealthDataType.WORKOUT,
     HealthDataType.ACTIVE_ENERGY_BURNED,
   ];
 
@@ -19,11 +19,9 @@ class HomeViewModel {
     HealthDataAccess.READ,
     HealthDataAccess.READ,
     HealthDataAccess.READ,
-    HealthDataAccess.READ,
   ];
   final _now = DateTime.now();
 
-  // Получение общих данных о здоровье
   Future<void> fetchDataHealth() async {
     bool requested = await health.requestAuthorization(
       _types,
@@ -37,24 +35,27 @@ class HomeViewModel {
         healthData =
             await health.getHealthDataFromTypes(midnight, _now, _types);
       } catch (e) {
-        print("Ошибка $e");
+        throw Exception(e);
       }
     } else {
-      print('Нет доступа к типам данных');
+      throw Exception('Нет доступа к данным');
     }
 
-    getEnergyBurned();
+    eneregyBurned = getHealthData(HealthDataType.ACTIVE_ENERGY_BURNED);
+    moveMinutes = getHealthData(HealthDataType.MOVE_MINUTES);
     await getSteps();
   }
 
-  // Получение сожжёных калорий
-  void getEnergyBurned() {
+  int getHealthData(HealthDataType dataType) {
+    int health = 0;
     for (var el in healthData) {
-      if (el.value is WorkoutHealthValue) {
-        eneregyBurned = (el.value as WorkoutHealthValue).totalEnergyBurned ?? 0;
-        print("Сожжено калорий - $eneregyBurned");
+      if (el.typeString == dataType.name) {
+        if (el.value is NumericHealthValue) {
+          health += (el.value as NumericHealthValue).numericValue.round();
+        }
       }
     }
+    return health;
   }
 
   Future<void> getSteps() async {
@@ -62,7 +63,7 @@ class HomeViewModel {
     try {
       steps = await health.getTotalStepsInInterval(midnight, _now) ?? 0;
     } catch (error) {
-      print("Ошибка получение шагов: $error");
+      throw Exception(error);
     }
   }
 }

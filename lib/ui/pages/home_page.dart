@@ -39,9 +39,9 @@ class HomePage extends StatelessWidget {
                         statistic: '${vm.steps} шагов',
                         color: HealthCardColors.step,
                       ),
-                      const HealthCard(
+                      HealthCard(
                         title: 'Активность',
-                        statistic: '--- минут',
+                        statistic: '${vm.moveMinutes} минут',
                         color: HealthCardColors.activity,
                       ),
                       HealthCard(
