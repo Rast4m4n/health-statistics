@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: AppPaddings.hight),
               FutureBuilder(
-                future: vm.fetchDataHealth(),
+                future: vm.fetchAllDataHealth(),
                 builder: (context, snapshot) {
                   return Wrap(
                     alignment: WrapAlignment.spaceBetween,
