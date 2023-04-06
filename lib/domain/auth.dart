@@ -20,4 +20,14 @@ class AuthGoogle {
       }
     }
   }
+
+  Future<String?> getEmail() async {
+    final GoogleSignInAccount? googleUser =
+        await _googleSignIn.signInSilently();
+
+    if (googleUser != null) {
+      return googleUser.email;
+    }
+    return null;
+  }
 }

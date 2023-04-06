@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:health_statistics/data/api/services/health_statistics_api.dart';
+import 'package:health_statistics/data/repository/health_statistics_repository.dart';
+import 'package:health_statistics/domain/models/health_statistic_model.dart';
 import 'package:health_statistics/ui/pages/home_view_model.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
 import 'package:health_statistics/ui/themes/app_theme.dart';
@@ -8,7 +11,14 @@ class HomePage extends StatelessWidget {
   HomePage({
     super.key,
   });
-  final vm = HomeViewModel();
+  final _healthRepository = HealthStatisticsRepository(
+    healthApi: HealthStatisticApi(),
+  );
+
+  late final vm = HomeViewModel(
+    healthRepository: _healthRepository,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +37,7 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: AppPaddings.hight),
               FutureBuilder(
-                future: vm.fetchAllDataHealth(),
+                future: vm.fetchDataFromGoogleFit(),
                 builder: (context, snapshot) {
                   return Wrap(
                     alignment: WrapAlignment.spaceBetween,

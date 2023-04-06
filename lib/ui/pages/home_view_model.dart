@@ -1,9 +1,18 @@
 import 'package:health/health.dart';
+import 'package:health_statistics/data/repository/health_statistics_repository.dart';
+import 'package:health_statistics/domain/auth.dart';
+import 'package:health_statistics/domain/models/health_statistic_model.dart';
 
 class HomeViewModel {
-  HomeViewModel();
+  HomeViewModel({
+    required this.healthRepository,
+  });
 
+  final HealthStatisticsRepository healthRepository;
+  late HealthStatisticModel healthModel;
   List<HealthDataPoint> _healthData = [];
+  final googleUser = AuthGoogle();
+
   int _steps = 0;
   int get steps => _steps;
 
@@ -29,7 +38,31 @@ class HomeViewModel {
 
   final _now = DateTime.now();
 
-  Future<void> fetchAllDataHealth() async {
+  Future<void> fetchDataFromDB() async {
+    final data = await healthRepository.fetchHealthData();
+    List<DateTime> dates = [];
+
+    for (var health in data) {
+      if (health.email == await googleUser.getEmail()) {
+        dates.add(health.dateTimeActivity);
+        DateTime latestDate = dates.reduce(
+          (value, element) => value.isAfter(element) ? value : element,
+        );
+
+        if (health.dateTimeActivity == latestDate) {
+          healthModel = HealthStatisticModel(
+            email: health.email,
+            steps: health.steps,
+            minutesWalk: health.minutesWalk,
+            burnedEnergy: health.burnedEnergy,
+            dateTimeActivity: health.dateTimeActivity,
+          );
+        }
+      }
+    }
+  }
+
+  Future<void> fetchDataFromGoogleFit() async {
     bool requested = await _health.requestAuthorization(
       _types,
       permissions: _permission,
@@ -51,6 +84,16 @@ class HomeViewModel {
     _eneregyBurned = _getHealthData(HealthDataType.ACTIVE_ENERGY_BURNED);
     _moveMinutes = _getHealthData(HealthDataType.MOVE_MINUTES);
     await _getSteps();
+
+    await healthRepository.saveHealthData(
+      HealthStatisticModel(
+        email: await googleUser.getEmail(),
+        steps: steps,
+        minutesWalk: _moveMinutes,
+        burnedEnergy: _eneregyBurned,
+        dateTimeActivity: DateTime.now(),
+      ),
+    );
   }
 
   int _getHealthData(HealthDataType dataType) {

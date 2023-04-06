@@ -1,4 +1,5 @@
 abstract class UrlApi {
-  static const _baseUri = 'http://127.0.0.1:8000';
+  // ip 10.0.2.2 для андроид эмулятора
+  static const _baseUri = 'http://10.0.2.2:8000';
   static const healthUri = '$_baseUri/api/usersHealth/';
 }

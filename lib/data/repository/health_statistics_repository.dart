@@ -7,4 +7,7 @@ class HealthStatisticsRepository {
 
   Future<List<HealthStatisticModel>> fetchHealthData() =>
       healthApi.fetchHealth();
+
+  Future<void> saveHealthData(HealthStatisticModel healthData) =>
+      healthApi.saveHealthData(healthData);
 }
