@@ -38,30 +38,6 @@ class HomeViewModel {
 
   final _now = DateTime.now();
 
-  Future<void> fetchDataFromDB() async {
-    final data = await healthRepository.fetchHealthData();
-    List<DateTime> dates = [];
-
-    for (var health in data) {
-      if (health.email == await googleUser.getEmail()) {
-        dates.add(health.dateTimeActivity);
-        DateTime latestDate = dates.reduce(
-          (value, element) => value.isAfter(element) ? value : element,
-        );
-
-        if (health.dateTimeActivity == latestDate) {
-          healthModel = HealthStatisticModel(
-            email: health.email,
-            steps: health.steps,
-            minutesWalk: health.minutesWalk,
-            burnedEnergy: health.burnedEnergy,
-            dateTimeActivity: health.dateTimeActivity,
-          );
-        }
-      }
-    }
-  }
-
   Future<void> fetchDataFromGoogleFit() async {
     bool requested = await _health.requestAuthorization(
       _types,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:health_statistics/data/api/services/health_statistics_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
-import 'package:health_statistics/domain/models/health_statistic_model.dart';
 import 'package:health_statistics/ui/pages/home_view_model.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
 import 'package:health_statistics/ui/themes/app_theme.dart';
+import 'package:health_statistics/ui/widgets/charts/chart_health_stat.dart';
 import 'package:health_statistics/ui/widgets/health_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -47,24 +48,25 @@ class HomePage extends StatelessWidget {
                       HealthCard(
                         title: 'Шаги',
                         statistic: '${vm.steps} шагов',
-                        color: HealthCardColors.step,
+                        color: AppColors.step,
                       ),
                       HealthCard(
                         title: 'Активность',
                         statistic: '${vm.moveMinutes} минут',
-                        color: HealthCardColors.activity,
+                        color: AppColors.activity,
                       ),
                       HealthCard(
                         title: 'Расход энергии',
                         statistic: '${vm.eneregyBurned} калорий потрачено',
-                        color: HealthCardColors.energyConsumption,
+                        color: AppColors.energyConsumption,
                         isFullWidth: true,
                       ),
                     ],
                   );
                 },
               ),
-              const SizedBox(height: AppPaddings.low),
+              const SizedBox(height: AppPaddings.hight),
+              const ChartsHealthStat(),
             ],
           ),
         ),

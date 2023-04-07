@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class HealthCardColors {
+abstract class AppColors {
   static const Color step = Color(0xffFF9292);
   static const Color activity = Color(0xff92BDFF);
   static const Color energyConsumption = Color(0xffBF98FF);
