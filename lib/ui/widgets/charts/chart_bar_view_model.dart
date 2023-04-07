@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:health_statistics/data/api/services/health_statistics_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
 import 'package:health_statistics/domain/auth.dart';
@@ -12,7 +14,10 @@ class ChartBarViewModel {
   Future<List<Bar>> fetchDataFromDB() async {
     final repo = HealthStatisticsRepository(healthApi: HealthStatisticApi());
     final user = AuthGoogle();
-    final data = await repo.fetchHealthData();
+    List<HealthStatisticModel> data = [];
+    await Future.delayed(const Duration(seconds: 1), () async {
+      data = await repo.fetchHealthData();
+    });
 
     List<HealthStatisticModel> currentUserHeatlh = [];
 
