@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_statistics/ui/pages/home_page.dart';
+import 'package:health_statistics/ui/pages/home/home_page.dart';
 
 class AppRoute {
   static String home = '/';

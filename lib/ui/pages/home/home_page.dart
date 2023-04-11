@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:health_statistics/data/api/services/health_statistics_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
-import 'package:health_statistics/ui/pages/home_view_model.dart';
+import 'package:health_statistics/ui/pages/home/home_view_model.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
 import 'package:health_statistics/ui/themes/app_theme.dart';
 import 'package:health_statistics/ui/widgets/charts/chart_health_stat.dart';
-import 'package:health_statistics/ui/widgets/health_card.dart';
+import 'package:health_statistics/ui/widgets/healthCard/health_card.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(height: AppPaddings.hight),
+              const SizedBox(height: AppPaddings.hight * 2),
               const ChartsHealthStat(),
             ],
           ),

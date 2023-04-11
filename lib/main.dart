@@ -8,7 +8,6 @@ import 'package:permission_handler/permission_handler.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final user = AuthGoogle();
-
   await user.signIn();
 
   var statusActivity = await Permission.activityRecognition.status;
