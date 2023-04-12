@@ -35,8 +35,10 @@ class PieChartWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ConstrainedBox(
-                constraints:
-                    const BoxConstraints(maxHeight: 200, maxWidth: 200),
+                constraints: const BoxConstraints(
+                  maxHeight: 200,
+                  maxWidth: 200,
+                ),
                 child: PieChart(
                   PieChartData(
                     sections: [
@@ -69,6 +71,7 @@ class PieChartWidget extends StatelessWidget {
 
   List<PieChartSectionData> getCountUsers(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
+          fontSize: 16,
           color: Colors.white,
         );
     List<PieChartSectionData> pieChartUsers = [];
@@ -76,11 +79,13 @@ class PieChartWidget extends StatelessWidget {
       pieChartUsers = [
         PieChartSectionData(
           value: vm.quantityMen.toDouble(),
+          title: vm.quantityMen.toString(),
           color: pieColor[0],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.quantityWomen.toDouble(),
+          title: vm.quantityWomen.toString(),
           color: pieColor[1],
           titleStyle: textStyle,
         ),
@@ -89,16 +94,19 @@ class PieChartWidget extends StatelessWidget {
       pieChartUsers = [
         PieChartSectionData(
           value: vm.userOlderLow.toDouble(),
+          title: vm.userOlderLow.toString(),
           color: pieColor[0],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.userOlderMedium.toDouble(),
+          title: vm.userOlderMedium.toString(),
           color: pieColor[1],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.userOlderHight.toDouble(),
+          title: vm.userOlderHight.toString(),
           color: pieColor[2],
           titleStyle: textStyle,
         ),
@@ -107,16 +115,19 @@ class PieChartWidget extends StatelessWidget {
       pieChartUsers = [
         PieChartSectionData(
           value: vm.userWithSmallWalk.toDouble(),
+          title: vm.userWithSmallWalk.toString(),
           color: pieColor[0],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.userWithMediumWalk.toDouble(),
+          title: vm.userWithMediumWalk.toString(),
           color: pieColor[1],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.userWithHightWalk.toDouble(),
+          title: vm.userWithHightWalk.toString(),
           color: pieColor[2],
           titleStyle: textStyle,
         ),

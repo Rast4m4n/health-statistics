@@ -27,7 +27,6 @@ class PieChartViewModel {
       (a, b) => a.dateTimeActivity.compareTo(b.dateTimeActivity),
     );
     final sortedData = data;
-    print(sortedData[0].dateTimeActivity);
     for (var health in sortedData) {
       if (!_emails.contains(health.email)) {
         _emails.add(health.email!);

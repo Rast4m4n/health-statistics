@@ -24,7 +24,7 @@ class GeneralStatisticPage extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: AppPaddings.hight),
+          const SizedBox(height: AppPaddings.low),
           const _ChartByQuantityUsers(),
           const SizedBox(height: AppPaddings.hight),
           const _ChartByUserOlder(),
@@ -56,11 +56,6 @@ class _ChartByQuantityUsers extends StatelessWidget {
           color: AppColors.step,
           text: 'Кол-во пользователей\n женского пола',
         ),
-        SizedBox(height: AppPaddings.medium),
-        TextStatistic(
-          isGradient: true,
-          text: 'Общее кол-во\n пользователей',
-        ),
       ],
     );
   }
@@ -91,7 +86,7 @@ class _ChartByUserOlder extends StatelessWidget {
         SizedBox(height: AppPaddings.medium),
         TextStatistic(
           color: AppColors.energyConsumption,
-          text: 'Общее кол-во\n пользователей\n старше 40',
+          text: 'Кол-во пользователей\n старше 40',
         ),
       ],
     );
