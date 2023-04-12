@@ -3,23 +3,23 @@ import 'dart:async';
 import 'package:health_statistics/data/api/services/health_statistics_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
 import 'package:health_statistics/domain/auth.dart';
-import 'package:health_statistics/domain/models/health_statistic_model.dart';
+import 'package:health_statistics/domain/models/health_model.dart';
 
 class ChartBarViewModel {
   ChartBarViewModel();
 
   final List<Bar> barData = [];
-  final Map<int, HealthStatisticModel> _dayAndHealth = {};
+  final Map<int, HealthModel> _dayAndHealth = {};
 
   Future<List<Bar>> fetchDataFromDB() async {
     final repo = HealthStatisticsRepository(healthApi: HealthStatisticApi());
     final user = AuthGoogle();
-    List<HealthStatisticModel> data = [];
-    await Future.delayed(const Duration(seconds: 1), () async {
+    List<HealthModel> data = [];
+    await Future.delayed(const Duration(seconds: 2), () async {
       data = await repo.fetchHealthData();
     });
 
-    List<HealthStatisticModel> currentUserHeatlh = [];
+    List<HealthModel> currentUserHeatlh = [];
 
     for (var health in data) {
       if (health.email == await user.getEmail()) {

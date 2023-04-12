@@ -1,25 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'health_statistic_model.dart';
+part of 'health_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-HealthStatisticModel _$HealthStatisticModelFromJson(
-        Map<String, dynamic> json) =>
-    HealthStatisticModel(
+HealthModel _$HealthModelFromJson(Map<String, dynamic> json) => HealthModel(
       email: json['email'] as String?,
+      gender: json['gender'] as String?,
+      age: json['age'] as int?,
       steps: json['steps'] as int,
       minutesWalk: json['minutesWalk'] as int,
       burnedEnergy: json['burnedEnergy'] as int,
       dateTimeActivity: DateTime.parse(json['dateTimeActivity'] as String),
     );
 
-Map<String, dynamic> _$HealthStatisticModelToJson(
-        HealthStatisticModel instance) =>
+Map<String, dynamic> _$HealthModelToJson(HealthModel instance) =>
     <String, dynamic>{
       'email': instance.email,
+      'gender': instance.gender,
+      'age': instance.age,
       'steps': instance.steps,
       'minutesWalk': instance.minutesWalk,
       'burnedEnergy': instance.burnedEnergy,

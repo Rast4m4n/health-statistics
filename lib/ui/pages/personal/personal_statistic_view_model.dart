@@ -1,17 +1,17 @@
 import 'package:health/health.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
+import 'package:health_statistics/data/storage/shared_preferencese.dart';
 import 'package:health_statistics/domain/auth.dart';
-import 'package:health_statistics/domain/models/health_statistic_model.dart';
+import 'package:health_statistics/domain/models/health_model.dart';
 
-class HomeViewModel {
-  HomeViewModel({
+class PersonalViewModel {
+  PersonalViewModel({
     required this.healthRepository,
   });
-
   final HealthStatisticsRepository healthRepository;
-  late HealthStatisticModel healthModel;
+  late HealthModel healthModel;
   List<HealthDataPoint> _healthData = [];
-  final googleUser = AuthGoogle();
+  final _googleUser = AuthGoogle();
 
   int _steps = 0;
   int get steps => _steps;
@@ -61,9 +61,14 @@ class HomeViewModel {
     _moveMinutes = _getHealthData(HealthDataType.MOVE_MINUTES);
     await _getSteps();
 
+    final gender = await SharedPrefRepository.instance.getUserGenderData();
+    final age = await SharedPrefRepository.instance.getUserAgeData();
+
     await healthRepository.saveHealthData(
-      HealthStatisticModel(
-        email: await googleUser.getEmail(),
+      HealthModel(
+        email: await _googleUser.getEmail(),
+        gender: gender,
+        age: age,
         steps: steps,
         minutesWalk: _moveMinutes,
         burnedEnergy: _eneregyBurned,
