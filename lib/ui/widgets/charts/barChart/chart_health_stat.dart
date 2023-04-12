@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:health_statistics/ui/themes/app_theme.dart';
-import 'package:health_statistics/ui/widgets/charts/chart_bar_view_model.dart';
+import 'package:health_statistics/ui/widgets/charts/barChart/chart_bar_view_model.dart';
 
 class ChartsHealthStat extends StatelessWidget {
   const ChartsHealthStat({

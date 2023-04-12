@@ -4,7 +4,7 @@ import 'package:health_statistics/data/repository/health_statistics_repository.d
 import 'package:health_statistics/ui/pages/personal/personal_statistic_view_model.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
 import 'package:health_statistics/ui/themes/app_theme.dart';
-import 'package:health_statistics/ui/widgets/charts/chart_health_stat.dart';
+import 'package:health_statistics/ui/widgets/charts/barChart/chart_health_stat.dart';
 import 'package:health_statistics/ui/widgets/healthCard/health_card.dart';
 
 class PersonalStatisticPage extends StatelessWidget {
