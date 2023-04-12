@@ -15,9 +15,8 @@ class ChartBarViewModel {
     final repo = HealthStatisticsRepository(healthApi: HealthStatisticApi());
     final user = AuthGoogle();
     List<HealthModel> data = [];
-    await Future.delayed(const Duration(seconds: 2), () async {
-      data = await repo.fetchHealthData();
-    });
+
+    data = await repo.fetchHealthData();
 
     List<HealthModel> currentUserHeatlh = [];
 
