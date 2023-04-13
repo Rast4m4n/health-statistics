@@ -48,11 +48,11 @@ class ChartsHealthStat extends StatelessWidget {
               barRods: [
                 BarChartRodData(
                   toY: e.yAxisSteps,
-                  color: AppColors.step,
+                  color: AppColors.coral,
                 ),
                 BarChartRodData(
                   toY: e.yAxisCalories!,
-                  color: AppColors.energyConsumption,
+                  color: AppColors.purple,
                 ),
               ],
             ),

@@ -24,11 +24,49 @@ class GeneralStatisticPage extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.hight),
+            child: Text(
+              'Пользователей в приложении',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: Colors.black,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+          ),
           const SizedBox(height: AppPaddings.low),
           const _ChartByQuantityUsers(),
           const SizedBox(height: AppPaddings.hight),
           const _ChartByUserOlder(),
-          const SizedBox(height: AppPaddings.hight),
+          const SizedBox(height: AppPaddings.low),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.hight),
+            child: Text(
+              'Рекомендуемая активность в день',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: Colors.black,
+                  ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: AppPaddings.low),
+          Padding(
+            padding: const EdgeInsets.only(left: AppPaddings.low),
+            child: Column(
+              children: [
+                Text(
+                  'Рекомендуемое время аэробной активности в день - 75 минут',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: AppPaddings.low),
+                Text(
+                  'Рекомендуемое время аэробной активности в неделю - 150-300 минут',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppPaddings.low),
           const _ChartByDeficiencyActivity(),
         ],
       ),
@@ -45,15 +83,15 @@ class _ChartByQuantityUsers extends StatelessWidget {
   Widget build(BuildContext context) {
     return PieChartWidget(
       typeChart: PieChartEnum.countUsers,
-      pieColor: const [AppColors.activity, AppColors.step],
+      pieColor: const [AppColors.skyBlue, AppColors.coral],
       statText: const [
         TextStatistic(
-          color: AppColors.activity,
+          color: AppColors.skyBlue,
           text: 'Кол-во пользователей\n мужского пола',
         ),
         SizedBox(height: AppPaddings.medium),
         TextStatistic(
-          color: AppColors.step,
+          color: AppColors.coral,
           text: 'Кол-во пользователей\n женского пола',
         ),
       ],
@@ -69,24 +107,30 @@ class _ChartByUserOlder extends StatelessWidget {
     return PieChartWidget(
       typeChart: PieChartEnum.countUsersByAge,
       pieColor: const [
-        AppColors.activity,
-        AppColors.step,
-        AppColors.energyConsumption
+        AppColors.skyBlue,
+        AppColors.coral,
+        AppColors.purple,
+        AppColors.green,
       ],
       statText: const [
         TextStatistic(
-          color: AppColors.activity,
+          color: AppColors.skyBlue,
           text: 'Кол-во пользователей\n младше 18',
         ),
         SizedBox(height: AppPaddings.medium),
         TextStatistic(
-          color: AppColors.step,
+          color: AppColors.coral,
           text: 'Кол-во пользователей\n старше 18',
         ),
         SizedBox(height: AppPaddings.medium),
         TextStatistic(
-          color: AppColors.energyConsumption,
-          text: 'Кол-во пользователей\n старше 40',
+          color: AppColors.purple,
+          text: 'Кол-во пользователей\n старше 30',
+        ),
+        SizedBox(height: AppPaddings.medium),
+        TextStatistic(
+          color: AppColors.green,
+          text: 'Кол-во пользователей\n старше 60',
         ),
       ],
     );
@@ -99,26 +143,20 @@ class _ChartByDeficiencyActivity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PieChartWidget(
-      typeChart: PieChartEnum.countUsersByQuantitySteps,
+      typeChart: PieChartEnum.countUsersByActivity,
       pieColor: const [
-        AppColors.activity,
-        AppColors.step,
-        AppColors.energyConsumption
+        AppColors.skyBlue,
+        AppColors.coral,
       ],
       statText: const [
         TextStatistic(
-          color: AppColors.activity,
-          text: 'Пользователи с шагами\n меньше 5 тыс.',
+          color: AppColors.skyBlue,
+          text: 'Пользователей с\n активностью меньше\n 75 минут',
         ),
         SizedBox(height: AppPaddings.medium),
         TextStatistic(
-          color: AppColors.step,
-          text: 'Пользователи с шагами\n меньше 15 тыс.',
-        ),
-        SizedBox(height: AppPaddings.medium),
-        TextStatistic(
-          color: AppColors.energyConsumption,
-          text: 'Пользователи с шагами\n меньше 25 тыс.',
+          color: AppColors.coral,
+          text: 'Пользователей с\n активностью больше\n 75 минут',
         ),
       ],
     );

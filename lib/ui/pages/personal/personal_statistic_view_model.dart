@@ -59,8 +59,8 @@ class PersonalViewModel {
 
     _eneregyBurned = _getHealthData(HealthDataType.ACTIVE_ENERGY_BURNED);
     _moveMinutes = _getHealthData(HealthDataType.MOVE_MINUTES);
-    await _getSteps();
 
+    await _getSteps();
     final gender = await SharedPrefRepository.instance.getUserGenderData();
     final age = await SharedPrefRepository.instance.getUserAgeData();
 

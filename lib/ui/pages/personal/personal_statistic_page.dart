@@ -46,7 +46,7 @@ class _Statistics extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Статистика здоровья',
+          'Статистика активности',
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
@@ -64,17 +64,17 @@ class _Statistics extends StatelessWidget {
                 HealthCard(
                   title: 'Шаги',
                   statistic: '${vm.steps} шагов',
-                  color: AppColors.step,
+                  color: AppColors.coral,
                 ),
                 HealthCard(
                   title: 'Активность',
                   statistic: '${vm.moveMinutes} минут',
-                  color: AppColors.activity,
+                  color: AppColors.skyBlue,
                 ),
                 HealthCard(
                   title: 'Расход энергии',
                   statistic: '${vm.eneregyBurned} калорий потрачено',
-                  color: AppColors.energyConsumption,
+                  color: AppColors.purple,
                   isFullWidth: true,
                 ),
               ],

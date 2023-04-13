@@ -1,5 +1,6 @@
 enum PieChartEnum {
   countUsers,
   countUsersByAge,
-  countUsersByQuantitySteps;
+  countUsersByQuantitySteps,
+  countUsersByActivity;
 }

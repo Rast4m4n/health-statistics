@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:health_statistics/domain/enums/pie_chart_enum.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
-import 'package:health_statistics/ui/themes/app_theme.dart';
 import 'package:health_statistics/ui/widgets/charts/pieChart/pie_chart_view_model.dart';
 
 class PieChartWidget extends StatelessWidget {
@@ -110,6 +109,12 @@ class PieChartWidget extends StatelessWidget {
           color: pieColor[2],
           titleStyle: textStyle,
         ),
+        PieChartSectionData(
+          value: vm.userOlderExtraHight.toDouble(),
+          title: vm.userOlderExtraHight.toString(),
+          color: pieColor[3],
+          titleStyle: textStyle,
+        ),
       ];
     } else if (typeChart == PieChartEnum.countUsersByQuantitySteps) {
       pieChartUsers = [
@@ -132,6 +137,21 @@ class PieChartWidget extends StatelessWidget {
           titleStyle: textStyle,
         ),
       ];
+    } else if (typeChart == PieChartEnum.countUsersByActivity) {
+      pieChartUsers = [
+        PieChartSectionData(
+          value: vm.userWithBadActivity.toDouble(),
+          title: vm.userWithBadActivity.toString(),
+          color: pieColor[0],
+          titleStyle: textStyle,
+        ),
+        PieChartSectionData(
+          value: vm.userWithGoodActivity.toDouble(),
+          title: vm.userWithGoodActivity.toString(),
+          color: pieColor[1],
+          titleStyle: textStyle,
+        ),
+      ];
     }
 
     return pieChartUsers;
@@ -142,11 +162,9 @@ class TextStatistic extends StatelessWidget {
   const TextStatistic({
     super.key,
     this.color,
-    this.isGradient = false,
     required this.text,
   });
   final Color? color;
-  final bool isGradient;
   final String text;
   @override
   Widget build(BuildContext context) {
@@ -156,15 +174,8 @@ class TextStatistic extends StatelessWidget {
           width: 15,
           height: 15,
           decoration: BoxDecoration(
-            color: isGradient ? null : color,
+            color: color,
             shape: BoxShape.circle,
-            gradient: isGradient
-                ? const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [AppColors.activity, AppColors.step],
-                  )
-                : null,
           ),
         ),
         const SizedBox(width: AppPaddings.low),

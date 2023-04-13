@@ -13,10 +13,14 @@ class PieChartViewModel {
   int userOlderLow = 0;
   int userOlderMedium = 0;
   int userOlderHight = 0;
+  int userOlderExtraHight = 0;
 
   int userWithSmallWalk = 0;
   int userWithMediumWalk = 0;
   int userWithHightWalk = 0;
+
+  int userWithBadActivity = 0;
+  int userWithGoodActivity = 0;
 
   final _emails = <String>[];
 
@@ -33,6 +37,7 @@ class PieChartViewModel {
         _getCountUsersByGender(health);
         _getCountUsersByAge(health);
         _getUserByLessActivity(health);
+        _getUserByMinutesActivity(health);
       }
     }
     totalQuantity = _emails.length;
@@ -49,10 +54,12 @@ class PieChartViewModel {
   void _getCountUsersByAge(HealthModel health) {
     if (health.age! < 18) {
       userOlderLow += 1;
-    } else if (health.age! >= 18 && health.age! <= 40) {
+    } else if (health.age! >= 18 && health.age! <= 30) {
       userOlderMedium += 1;
-    } else if (health.age! >= 40) {
+    } else if (health.age! >= 30 && health.age! <= 60) {
       userOlderHight += 1;
+    } else if (health.age! > 60) {
+      userOlderExtraHight += 1;
     }
   }
 
@@ -63,6 +70,14 @@ class PieChartViewModel {
       userWithMediumWalk += 1;
     } else if (health.steps >= 15000 && health.steps < 25000) {
       userWithHightWalk += 1;
+    }
+  }
+
+  void _getUserByMinutesActivity(HealthModel health) {
+    if (health.minutesWalk < 75) {
+      userWithBadActivity += 1;
+    } else {
+      userWithGoodActivity += 1;
     }
   }
 }
