@@ -55,12 +55,12 @@ class GeneralStatisticPage extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Рекомендуемое время аэробной активности в день - 75 минут',
+                  'Рекомендуемое время аэробной активности в день - 75 минут.',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: AppPaddings.low),
                 Text(
-                  'Рекомендуемое время аэробной активности в неделю - 150-300 минут',
+                  'Рекомендуемое время аэробной активности в неделю - 150-300 минут.',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
@@ -68,6 +68,30 @@ class GeneralStatisticPage extends StatelessWidget {
           ),
           const SizedBox(height: AppPaddings.low),
           const _ChartByDeficiencyActivity(),
+          const SizedBox(height: AppPaddings.low),
+          Padding(
+            padding: const EdgeInsets.only(left: AppPaddings.low),
+            child: Column(
+              children: [
+                Text(
+                  'Рекомендуемое количество шагов в день малоподвижному человеку до 3 тысяч шагов.',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: AppPaddings.low),
+                Text(
+                  'Рекомендуемое количество шагов в день здоровому взрослому человеку - 10 тысяч шагов',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: AppPaddings.low),
+                Text(
+                  'Рекомендуемое количество шагов в день физически активному человеку - 20 тысяч шагов и более',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppPaddings.low),
+          const _ChartByQuantitySteps(),
         ],
       ),
     );
@@ -157,6 +181,38 @@ class _ChartByDeficiencyActivity extends StatelessWidget {
         TextStatistic(
           color: AppColors.coral,
           text: 'Пользователей с\n активностью больше\n 75 минут',
+        ),
+      ],
+    );
+  }
+}
+
+class _ChartByQuantitySteps extends StatelessWidget {
+  const _ChartByQuantitySteps({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PieChartWidget(
+      typeChart: PieChartEnum.countUsersByQuantitySteps,
+      pieColor: const [
+        AppColors.skyBlue,
+        AppColors.coral,
+        AppColors.purple,
+      ],
+      statText: const [
+        TextStatistic(
+          color: AppColors.skyBlue,
+          text: 'Пользователей с кол-вом\n шагов до 3тыс.',
+        ),
+        SizedBox(height: AppPaddings.medium),
+        TextStatistic(
+          color: AppColors.coral,
+          text: 'Пользователей с кол-вом\n шагов до 10тыс.',
+        ),
+        SizedBox(height: AppPaddings.medium),
+        TextStatistic(
+          color: AppColors.purple,
+          text: 'Пользователей с кол-вом\n шагов до 20тыс.\n и больше.',
         ),
       ],
     );

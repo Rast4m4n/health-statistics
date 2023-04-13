@@ -64,11 +64,11 @@ class PieChartViewModel {
   }
 
   void _getUserByLessActivity(HealthModel health) {
-    if (health.steps < 5000) {
+    if (health.steps < 3000) {
       userWithSmallWalk += 1;
-    } else if (health.steps >= 5000 && health.steps < 15000) {
+    } else if (health.steps >= 3000 && health.steps <= 10000) {
       userWithMediumWalk += 1;
-    } else if (health.steps >= 15000 && health.steps < 25000) {
+    } else if (health.steps > 10000) {
       userWithHightWalk += 1;
     }
   }
