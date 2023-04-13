@@ -11,6 +11,7 @@ dependencies:
   fl_chart: ^0.61.0
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.0
   google_sign_in: ^6.0.2
   health: ^4.6.0
   http: ^0.13.5
@@ -26,3 +27,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+     - assets/
+     - assets/icons/
+
+flutter_icons:
+   android: true
+   ios: true
+   image_path: "assets/icons/Статистика активности.jpg"
