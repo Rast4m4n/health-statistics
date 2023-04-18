@@ -22,15 +22,20 @@ class PersonalViewModel {
   int _moveMinutes = 0;
   int get moveMinutes => _moveMinutes;
 
+  int _distanceMove = 0;
+  int get distanceMove => _distanceMove;
+
   final HealthFactory _health = HealthFactory();
 
   final _types = [
     HealthDataType.STEPS,
     HealthDataType.MOVE_MINUTES,
     HealthDataType.ACTIVE_ENERGY_BURNED,
+    HealthDataType.DISTANCE_DELTA,
   ];
 
   final _permission = [
+    HealthDataAccess.READ,
     HealthDataAccess.READ,
     HealthDataAccess.READ,
     HealthDataAccess.READ,
@@ -59,6 +64,10 @@ class PersonalViewModel {
 
     _eneregyBurned = _getHealthData(HealthDataType.ACTIVE_ENERGY_BURNED);
     _moveMinutes = _getHealthData(HealthDataType.MOVE_MINUTES);
+
+    // Исправить отображение пройденной дистанции
+    _distanceMove = _getHealthData(HealthDataType.DISTANCE_DELTA);
+    print("Пройдено метров - $_distanceMove");
 
     await _getSteps();
     final gender = await SharedPrefRepository.instance.getUserGenderData();

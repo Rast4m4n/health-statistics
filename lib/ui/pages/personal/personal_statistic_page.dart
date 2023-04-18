@@ -63,7 +63,7 @@ class _Statistics extends StatelessWidget {
               children: [
                 HealthCard(
                   title: 'Шаги',
-                  statistic: '${vm.steps} шагов',
+                  statistic: '${vm.steps} шагов\n${vm.distanceMove}м. пройдено',
                   color: AppColors.coral,
                 ),
                 HealthCard(
