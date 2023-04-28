@@ -1,8 +1,10 @@
+import 'dart:convert';
+
+import 'package:health_statistics/domain/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class _KeysStorage {
-  static const genderKey = 'genderKey';
-  static const ageKey = 'ageKey';
+  static const userKey = 'userKey';
 }
 
 class SharedPrefRepository {
@@ -18,16 +20,18 @@ class SharedPrefRepository {
 
   final prefs = SharedPreferences.getInstance();
 
-  Future<void> saveUserData(String gender, int age) async {
-    await (await prefs).setString(_KeysStorage.genderKey, gender);
-    await (await prefs).setInt(_KeysStorage.ageKey, age);
+  Future<void> saveUserData(UserModel user) async {
+    final userJson = jsonEncode(user.toJson());
+    await (await prefs).setString(_KeysStorage.userKey, userJson);
   }
 
-  Future<int> getUserAgeData() async {
-    return (await prefs).getInt(_KeysStorage.ageKey) ?? 0;
-  }
-
-  Future<String> getUserGenderData() async {
-    return (await prefs).getString(_KeysStorage.genderKey) ?? '';
+  Future<UserModel?> getUserData() async {
+    final data = (await prefs).getString(_KeysStorage.userKey) ?? '';
+    if (data.isNotEmpty) {
+      final json = jsonDecode(data) as Map<String, dynamic>;
+      final user = UserModel.fromJson(json);
+      return user;
+    }
+    return null;
   }
 }
