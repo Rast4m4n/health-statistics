@@ -7,22 +7,20 @@ part of 'health_model.dart';
 // **************************************************************************
 
 HealthModel _$HealthModelFromJson(Map<String, dynamic> json) => HealthModel(
-      email: json['email'] as String?,
-      gender: json['gender'] as String?,
-      age: json['age'] as int?,
+      id: json['id'] as int,
       steps: json['steps'] as int,
       minutesWalk: json['minutesWalk'] as int,
       burnedEnergy: json['burnedEnergy'] as int,
       dateTimeActivity: DateTime.parse(json['dateTimeActivity'] as String),
+      userId: json['userId'] as int,
     );
 
 Map<String, dynamic> _$HealthModelToJson(HealthModel instance) =>
     <String, dynamic>{
-      'email': instance.email,
-      'gender': instance.gender,
-      'age': instance.age,
+      'id': instance.id,
       'steps': instance.steps,
       'minutesWalk': instance.minutesWalk,
       'burnedEnergy': instance.burnedEnergy,
       'dateTimeActivity': instance.dateTimeActivity.toIso8601String(),
+      'userId': instance.userId,
     };
