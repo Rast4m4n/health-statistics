@@ -12,9 +12,8 @@ class AppNavigation {
   bool _isAuth = false;
 
   Future<void> auth() async {
-    final gender = await SharedPrefRepository.instance.getUserGenderData();
-    final age = await SharedPrefRepository.instance.getUserAgeData();
-    if (gender == '' && age == 0) {
+    final user = await SharedPrefRepository.instance.getUserData();
+    if (user == null) {
       _isAuth = false;
     } else {
       _isAuth = true;
