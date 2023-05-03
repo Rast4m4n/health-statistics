@@ -22,63 +22,61 @@ class _AuthDialogState extends State<AuthDialog> {
     final textStyle = Theme.of(context).textTheme.bodyMedium;
     return SafeArea(
       child: Scaffold(
-        body: Dialog(
-          child: Padding(
-            padding: const EdgeInsets.all(AppPaddings.low),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Пол: '),
-                Row(
-                  children: [
-                    const Text('Муж'),
-                    Radio<GenderEnum>(
-                      value: GenderEnum.male,
-                      groupValue: gender,
-                      onChanged: (GenderEnum? value) {
-                        setState(
-                          () {
-                            gender = value;
-                          },
-                        );
-                      },
-                    ),
-                    const Text('Жен'),
-                    Radio<GenderEnum>(
-                      value: GenderEnum.female,
-                      groupValue: gender,
-                      onChanged: (GenderEnum? value) {
-                        setState(() {
-                          gender = GenderEnum.female;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: AppPaddings.low),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 100),
-                  child: TextField(
-                    style: textStyle,
-                    controller: viewModel.textAge,
-                    decoration: InputDecoration(
-                      label: Text('Возраст',
-                          style: textStyle?.copyWith(fontSize: 18)),
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 200),
+            child: Padding(
+              padding: const EdgeInsets.all(AppPaddings.low),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Пол: '),
+                  Row(
+                    children: [
+                      const Text('Муж'),
+                      Radio<GenderEnum>(
+                        value: GenderEnum.male,
+                        groupValue: gender,
+                        onChanged: (GenderEnum? value) {
+                          setState(
+                            () {
+                              gender = value;
+                            },
+                          );
+                        },
+                      ),
+                      const Text('Жен'),
+                      Radio<GenderEnum>(
+                        value: GenderEnum.female,
+                        groupValue: gender,
+                        onChanged: (GenderEnum? value) {
+                          setState(() {
+                            gender = GenderEnum.female;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppPaddings.low),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 100),
+                    child: TextField(
+                      style: textStyle,
+                      controller: viewModel.textAge,
+                      decoration: InputDecoration(
+                        label: Text('Возраст',
+                            style: textStyle?.copyWith(fontSize: 18)),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: AppPaddings.low),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () => viewModel.saveData(context),
-                      child: const Text('Сохранить'),
-                    ),
-                  ],
-                ),
-              ],
+                  const SizedBox(height: AppPaddings.low),
+                  TextButton(
+                    onPressed: () => viewModel.saveData(context),
+                    child: const Text('Сохранить'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
