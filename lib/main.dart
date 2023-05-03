@@ -11,7 +11,9 @@ Future<void> main() async {
   final user = AuthGoogle();
   await user.signIn();
   SharedPrefRepository();
+  await SharedPrefRepository.instance.clearOldHealthData();
   // (await SharedPrefRepository.instance.prefs).clear();
+
   var statusActivity = await Permission.activityRecognition.status;
   var statusLocation = await Permission.location.status;
 
