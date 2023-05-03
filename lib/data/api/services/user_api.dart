@@ -10,15 +10,10 @@ class UserApi {
   Future<void> saveUserData(UserModel userData) async {
     final users = await fetchUserData();
     final currentUser = (await SharedPrefRepository.instance.getUserData())!;
-    for (var user in users) {
-      if (user.id == currentUser.id) {
-        await _updateData(userData);
-        return;
-      }
-    }
-    if (!users.contains(currentUser)) {
+    if (users.contains(currentUser)) {
+      await _updateData(userData);
+    } else {
       await _saveData(userData);
-      print(userData.toJson());
     }
   }
 
@@ -35,7 +30,7 @@ class UserApi {
         throw Exception('Ошибка загрузки пользователей');
       }
     } on SocketException catch (e) {
-      throw Exception('Сетевая ошибка');
+      throw Exception('Сетевая ошибка: $e');
     } catch (e) {
       throw Exception('Общая ошибка');
     }
@@ -50,14 +45,12 @@ class UserApi {
           userData.toJson(),
         ),
       );
-      if (response.statusCode == 201) {
-        print('Данные пользователя сохранены');
-      } else {
-        print(
-            'Данные пользователя не сохранены! ошибка ${response.statusCode}');
+      if (response.statusCode != 201) {
+        throw Exception(
+            'Данные пользователя не сохранены: статус код ${response.statusCode}');
       }
     } catch (e) {
-      print('Ошибка сохранения пользователя: $e');
+      throw Exception('Ошибка сохранения данных');
     }
   }
 
@@ -69,15 +62,16 @@ class UserApi {
         body: jsonEncode(userData.toJson()),
       );
       if (response.statusCode == 200) {
-        print('Данные пользователя успешно изменены');
+        // print('Данные пользователя успешно изменены');
       } else if (response.statusCode == 404) {
-        print(
-            'Статус код 404: страница ${ConfigApi.userUri}${userData.id}/ не найдена');
+        throw Exception(
+            'Страница  ${ConfigApi.userUri}${userData.id} не найдена');
       } else {
-        print('Ошибка изменения данных пользователя: ${response.statusCode}');
+        throw Exception(
+            'Ошибка изменения данных пользователя: ${response.statusCode}');
       }
     } catch (e) {
-      print(e);
+      throw Exception('Ошибка изменения данных');
     }
   }
 }

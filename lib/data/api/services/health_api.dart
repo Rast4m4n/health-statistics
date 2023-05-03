@@ -51,13 +51,12 @@ class HealthApi {
         ),
       );
 
-      if (response.statusCode == 201) {
-        print('Данные сохранены');
-      } else {
-        print('Данные не сохранены healthAPI! ошибка ${response.statusCode}');
+      if (response.statusCode != 201) {
+        throw Exception(
+            'Данные статистики не сохранены: статус код ${response.statusCode}');
       }
     } catch (e) {
-      print('Ошибка сохранения healthAPI: $e');
+      throw Exception('Ошибка сохранения данных статистики');
     }
   }
 
@@ -69,15 +68,16 @@ class HealthApi {
         body: jsonEncode(healthData.toJson()),
       );
       if (response.statusCode == 200) {
-        print('Данные статистики успешно изменены');
+        // print('Данные статистики успешно изменены');
       } else if (response.statusCode == 404) {
-        print(
-            'Статус код 404: страница ${ConfigApi.healthUri}${healthData.id}/ не найдена');
+        throw Exception(
+            'Страница ${ConfigApi.healthUri}${healthData.id} не найдена');
       } else {
-        print('Ошибка изменения данных статистики: ${response.statusCode}');
+        throw Exception(
+            'Ошибка изменения данных статистики: ${response.statusCode}');
       }
     } catch (e) {
-      print(e);
+      throw Exception('Ошибка изменения данных');
     }
   }
 }
