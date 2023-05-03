@@ -20,4 +20,17 @@ class UserModel {
       _$UserModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  @override
+  bool operator ==(other) {
+    return (other is UserModel) &&
+        other.id == id &&
+        other.email == email &&
+        other.gender == gender &&
+        other.age == age;
+  }
+
+  @override
+  int get hashCode =>
+      id.hashCode ^ email.hashCode ^ gender.hashCode ^ age.hashCode;
 }
