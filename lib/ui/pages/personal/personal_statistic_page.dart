@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:health_statistics/data/api/services/health_statistics_api.dart';
+import 'package:health_statistics/data/api/services/health_api.dart';
+import 'package:health_statistics/data/api/services/user_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
 import 'package:health_statistics/ui/pages/personal/personal_statistic_view_model.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
 import 'package:health_statistics/ui/themes/app_theme.dart';
-import 'package:health_statistics/ui/widgets/charts/barChart/chart_health_stat.dart';
+import 'package:health_statistics/ui/widgets/charts/barChart/chart_bar_health_stat.dart';
 import 'package:health_statistics/ui/widgets/healthCard/health_card.dart';
 
 class PersonalStatisticPage extends StatelessWidget {
@@ -12,7 +13,8 @@ class PersonalStatisticPage extends StatelessWidget {
     super.key,
   });
   final _healthRepository = HealthStatisticsRepository(
-    healthApi: HealthStatisticApi(),
+    healthApi: HealthApi(),
+    userApi: UserApi(),
   );
 
   late final vm = PersonalViewModel(
@@ -82,7 +84,7 @@ class _Statistics extends StatelessWidget {
           },
         ),
         const SizedBox(height: AppPaddings.hight * 2),
-        const ChartsHealthStat(),
+        const ChartsBarHealthStat(),
       ],
     );
   }

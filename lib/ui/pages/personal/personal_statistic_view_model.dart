@@ -3,6 +3,7 @@ import 'package:health_statistics/data/repository/health_statistics_repository.d
 import 'package:health_statistics/data/storage/shared_preferencese.dart';
 import 'package:health_statistics/domain/auth.dart';
 import 'package:health_statistics/domain/models/health_model.dart';
+import 'package:health_statistics/domain/models/user_model.dart';
 
 class PersonalViewModel {
   PersonalViewModel({
@@ -65,25 +66,63 @@ class PersonalViewModel {
     _eneregyBurned = _getHealthData(HealthDataType.ACTIVE_ENERGY_BURNED);
     _moveMinutes = _getHealthData(HealthDataType.MOVE_MINUTES);
 
-    // Исправить отображение пройденной дистанции
     _distanceMove = _getHealthData(HealthDataType.DISTANCE_DELTA);
-    print("Пройдено метров - $_distanceMove");
 
     await _getSteps();
-    final gender = await SharedPrefRepository.instance.getUserGenderData();
-    final age = await SharedPrefRepository.instance.getUserAgeData();
+
+    await _saveToDB();
+
+    await _saveToShared();
+  }
+
+  Future<void> _saveToDB() async {
+    final user = (await SharedPrefRepository.instance.getUserData())!;
+
+    final UserModel userModel = UserModel(
+      id: user.id,
+      email: (await _googleUser.getEmail())!,
+      gender: user.gender,
+      age: user.age,
+    );
+
+    await healthRepository.saveUserData(userModel);
+
+    int healthId = 1;
+
+    final health = await healthRepository.fetchHealthData();
+
+    for (var health in health) {
+      if (health.userId == user.id) {
+        healthId = health.id;
+      }
+    }
 
     await healthRepository.saveHealthData(
       HealthModel(
-        email: await _googleUser.getEmail(),
-        gender: gender,
-        age: age,
+        id: healthId,
         steps: steps,
         minutesWalk: _moveMinutes,
         burnedEnergy: _eneregyBurned,
         dateTimeActivity: DateTime.now(),
+        userId: userModel.id,
       ),
     );
+  }
+
+  Future<void> _saveToShared() async {
+    final user = (await SharedPrefRepository.instance.getUserData())!;
+    final UserModel userModel = UserModel(
+      id: user.id,
+      email: (await _googleUser.getEmail())!,
+      gender: user.gender,
+      age: user.age,
+    );
+    final healths = await healthRepository.fetchHealthData();
+    for (var health in healths) {
+      if (health.userId == userModel.id) {
+        await SharedPrefRepository.instance.saveHealthData(health);
+      }
+    }
   }
 
   int _getHealthData(HealthDataType dataType) {
