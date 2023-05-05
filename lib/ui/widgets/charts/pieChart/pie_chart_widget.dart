@@ -28,7 +28,8 @@ class PieChartWidget extends StatelessWidget {
             vm.userOlderMedium != 0 ||
             vm.userOlderHight != 0 && vm.userWithSmallWalk != 0 ||
             vm.userWithMediumWalk != 0 ||
-            vm.userWithHightWalk != 0) {
+            vm.userWithHightWalk != 0 ||
+            vm.percentMotivations != 0) {
           return Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +42,7 @@ class PieChartWidget extends StatelessWidget {
                 child: PieChart(
                   PieChartData(
                     sections: [
-                      ...getCountUsers(context),
+                      ..._getChartData(context),
                     ],
                     sectionsSpace: 0,
                     centerSpaceRadius: 60,
@@ -61,14 +62,13 @@ class PieChartWidget extends StatelessWidget {
             ],
           );
         } else {
-          // Косяк с прогресс-индикатором из-за ListView
           return const CircularProgressIndicator();
         }
       },
     );
   }
 
-  List<PieChartSectionData> getCountUsers(BuildContext context) {
+  List<PieChartSectionData> _getChartData(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
           fontSize: 16,
           color: Colors.white,
@@ -152,8 +152,20 @@ class PieChartWidget extends StatelessWidget {
           titleStyle: textStyle,
         ),
       ];
+    } else if (typeChart == PieChartEnum.percentMotivations) {
+      pieChartUsers = [
+        PieChartSectionData(
+            value: vm.percentMotivations,
+            title: '${vm.percentMotivations.toStringAsFixed(1)}%',
+            color: pieColor[0],
+            titleStyle: textStyle),
+        PieChartSectionData(
+            value: 100 - vm.percentMotivations,
+            title: '${100 - vm.percentMotivations}%',
+            color: pieColor[1],
+            titleStyle: textStyle)
+      ];
     }
-
     return pieChartUsers;
   }
 }

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:health_statistics/data/api/services/health_api.dart';
 import 'package:health_statistics/data/api/services/user_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
+import 'package:health_statistics/domain/enums/pie_chart_enum.dart';
 import 'package:health_statistics/ui/pages/personal/personal_statistic_view_model.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
 import 'package:health_statistics/ui/themes/app_theme.dart';
 import 'package:health_statistics/ui/widgets/charts/barChart/chart_bar_health_stat.dart';
+import 'package:health_statistics/ui/widgets/charts/pieChart/pie_chart_widget.dart';
 import 'package:health_statistics/ui/widgets/healthCard/health_card.dart';
 
 class PersonalStatisticPage extends StatelessWidget {
@@ -83,6 +85,25 @@ class _Statistics extends StatelessWidget {
               ],
             );
           },
+        ),
+        const SizedBox(height: AppPaddings.hight),
+        Column(
+          children: [
+            PieChartWidget(
+              statText: const [
+                TextStatistic(
+                  text: 'Вы обошли по шагам\n пользователей',
+                  color: AppColors.coral,
+                ),
+                TextStatistic(
+                  text: 'Вас обошли по шагам\n пользователей',
+                  color: AppColors.skyBlue,
+                ),
+              ],
+              pieColor: const [AppColors.coral, AppColors.skyBlue],
+              typeChart: PieChartEnum.percentMotivations,
+            ),
+          ],
         ),
         const SizedBox(height: AppPaddings.hight),
         Center(

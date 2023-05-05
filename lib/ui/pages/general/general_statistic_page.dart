@@ -105,18 +105,22 @@ class _ChartByQuantityUsers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PieChartWidget(
-      typeChart: PieChartEnum.countUsers,
-      pieColor: const [AppColors.skyBlue, AppColors.coral],
-      statText: const [
-        TextStatistic(
-          color: AppColors.skyBlue,
-          text: 'Кол-во пользователей\n мужского пола',
-        ),
-        SizedBox(height: AppPaddings.medium),
-        TextStatistic(
-          color: AppColors.coral,
-          text: 'Кол-во пользователей\n женского пола',
+    return Column(
+      children: [
+        PieChartWidget(
+          typeChart: PieChartEnum.countUsers,
+          pieColor: const [AppColors.skyBlue, AppColors.coral],
+          statText: const [
+            TextStatistic(
+              color: AppColors.skyBlue,
+              text: 'Кол-во пользователей\n мужского пола',
+            ),
+            SizedBox(height: AppPaddings.medium),
+            TextStatistic(
+              color: AppColors.coral,
+              text: 'Кол-во пользователей\n женского пола',
+            ),
+          ],
         ),
       ],
     );
@@ -128,33 +132,37 @@ class _ChartByUserOlder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PieChartWidget(
-      typeChart: PieChartEnum.countUsersByAge,
-      pieColor: const [
-        AppColors.skyBlue,
-        AppColors.coral,
-        AppColors.purple,
-        AppColors.green,
-      ],
-      statText: const [
-        TextStatistic(
-          color: AppColors.skyBlue,
-          text: 'Кол-во пользователей\n младше 18',
-        ),
-        SizedBox(height: AppPaddings.medium),
-        TextStatistic(
-          color: AppColors.coral,
-          text: 'Кол-во пользователей\n старше 18',
-        ),
-        SizedBox(height: AppPaddings.medium),
-        TextStatistic(
-          color: AppColors.purple,
-          text: 'Кол-во пользователей\n старше 30',
-        ),
-        SizedBox(height: AppPaddings.medium),
-        TextStatistic(
-          color: AppColors.green,
-          text: 'Кол-во пользователей\n старше 60',
+    return Column(
+      children: [
+        PieChartWidget(
+          typeChart: PieChartEnum.countUsersByAge,
+          pieColor: const [
+            AppColors.skyBlue,
+            AppColors.coral,
+            AppColors.purple,
+            AppColors.green,
+          ],
+          statText: const [
+            TextStatistic(
+              color: AppColors.skyBlue,
+              text: 'Кол-во пользователей\n младше 18',
+            ),
+            SizedBox(height: AppPaddings.medium),
+            TextStatistic(
+              color: AppColors.coral,
+              text: 'Кол-во пользователей\n старше 18',
+            ),
+            SizedBox(height: AppPaddings.medium),
+            TextStatistic(
+              color: AppColors.purple,
+              text: 'Кол-во пользователей\n старше 30',
+            ),
+            SizedBox(height: AppPaddings.medium),
+            TextStatistic(
+              color: AppColors.green,
+              text: 'Кол-во пользователей\n старше 60',
+            ),
+          ],
         ),
       ],
     );
@@ -166,21 +174,25 @@ class _ChartByDeficiencyActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PieChartWidget(
-      typeChart: PieChartEnum.countUsersByActivity,
-      pieColor: const [
-        AppColors.skyBlue,
-        AppColors.coral,
-      ],
-      statText: const [
-        TextStatistic(
-          color: AppColors.skyBlue,
-          text: 'Пользователей с\n активностью меньше\n 75 минут',
-        ),
-        SizedBox(height: AppPaddings.medium),
-        TextStatistic(
-          color: AppColors.coral,
-          text: 'Пользователей с\n активностью больше\n 75 минут',
+    return Column(
+      children: [
+        PieChartWidget(
+          typeChart: PieChartEnum.countUsersByActivity,
+          pieColor: const [
+            AppColors.skyBlue,
+            AppColors.coral,
+          ],
+          statText: const [
+            TextStatistic(
+              color: AppColors.skyBlue,
+              text: 'Пользователей с\n активностью меньше\n 75 минут',
+            ),
+            SizedBox(height: AppPaddings.medium),
+            TextStatistic(
+              color: AppColors.coral,
+              text: 'Пользователей с\n активностью больше\n 75 минут',
+            ),
+          ],
         ),
       ],
     );
@@ -192,27 +204,31 @@ class _ChartByQuantitySteps extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PieChartWidget(
-      typeChart: PieChartEnum.countUsersByQuantitySteps,
-      pieColor: const [
-        AppColors.skyBlue,
-        AppColors.coral,
-        AppColors.purple,
-      ],
-      statText: const [
-        TextStatistic(
-          color: AppColors.skyBlue,
-          text: 'Пользователей с кол-вом\n шагов до 3тыс.',
-        ),
-        SizedBox(height: AppPaddings.medium),
-        TextStatistic(
-          color: AppColors.coral,
-          text: 'Пользователей с кол-вом\n шагов до 10тыс.',
-        ),
-        SizedBox(height: AppPaddings.medium),
-        TextStatistic(
-          color: AppColors.purple,
-          text: 'Пользователей с кол-вом\n шагов до 20тыс.\n и больше.',
+    return Column(
+      children: [
+        PieChartWidget(
+          typeChart: PieChartEnum.countUsersByQuantitySteps,
+          pieColor: const [
+            AppColors.skyBlue,
+            AppColors.coral,
+            AppColors.purple,
+          ],
+          statText: const [
+            TextStatistic(
+              color: AppColors.skyBlue,
+              text: 'Пользователей с кол-вом\n шагов до 3тыс.',
+            ),
+            SizedBox(height: AppPaddings.medium),
+            TextStatistic(
+              color: AppColors.coral,
+              text: 'Пользователей с кол-вом\n шагов до 10тыс.',
+            ),
+            SizedBox(height: AppPaddings.medium),
+            TextStatistic(
+              color: AppColors.purple,
+              text: 'Пользователей с кол-вом\n шагов до 20тыс.\n и больше.',
+            ),
+          ],
         ),
       ],
     );

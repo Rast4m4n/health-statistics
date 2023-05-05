@@ -1,12 +1,18 @@
 import 'package:health_statistics/data/api/services/health_api.dart';
 import 'package:health_statistics/data/api/services/user_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
+import 'package:health_statistics/data/storage/shared_preferencese.dart';
 import 'package:health_statistics/domain/enums/gender_enum.dart';
 import 'package:health_statistics/domain/models/health_model.dart';
 import 'package:health_statistics/domain/models/user_model.dart';
 
 class PieChartViewModel {
   PieChartViewModel();
+
+  final _repo = HealthStatisticsRepository(
+    healthApi: HealthApi(),
+    userApi: UserApi(),
+  );
 
   int quantityWomen = 0;
   int quantityMen = 0;
@@ -24,13 +30,12 @@ class PieChartViewModel {
   int userWithBadActivity = 0;
   int userWithGoodActivity = 0;
 
+  /// процент людей, которых обошли по шагам.
+  double percentMotivations = 0;
+
   Future<void> fetchDataFromDB() async {
-    final repo = HealthStatisticsRepository(
-      healthApi: HealthApi(),
-      userApi: UserApi(),
-    );
-    final healthData = await repo.fetchHealthData();
-    final usersData = await repo.fetchUserData();
+    final healthData = await _repo.fetchHealthData();
+    final usersData = await _repo.fetchUserData();
 
     for (var user in usersData) {
       _getCountUsersByGender(user);
@@ -41,6 +46,7 @@ class PieChartViewModel {
       _getUserByMinutesActivity(health);
     }
     totalQuantity = healthData.length;
+    await _getMotivationsSteps();
   }
 
   void _getCountUsersByGender(UserModel user) {
@@ -79,5 +85,27 @@ class PieChartViewModel {
     } else {
       userWithGoodActivity += 1;
     }
+  }
+
+  /// получает процент людей, которых обогнал пользователь по количеству шагов.
+  Future<void> _getMotivationsSteps() async {
+    final healthData = await _repo.fetchHealthData();
+
+    final currentUser = await SharedPrefRepository.instance.getUserData();
+    final listUsersSteps = [];
+    int mySteps = 0;
+    for (var health in healthData) {
+      if (currentUser!.id == health.userId) {
+        mySteps = health.steps;
+      } else {
+        listUsersSteps.add(health.steps);
+      }
+    }
+
+    listUsersSteps.add(mySteps);
+    listUsersSteps.sort();
+    final index = listUsersSteps.indexOf(mySteps);
+
+    percentMotivations = index / (listUsersSteps.length - 1) * 100;
   }
 }

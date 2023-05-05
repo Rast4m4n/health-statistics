@@ -2,5 +2,7 @@ enum PieChartEnum {
   countUsers,
   countUsersByAge,
   countUsersByQuantitySteps,
-  countUsersByActivity;
+  countUsersByActivity,
+  // Процент людей, которых обошли по шагам.
+  percentMotivations;
 }
