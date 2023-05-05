@@ -24,6 +24,14 @@ class ChartBarViewModel {
             yAxisCalories: _dayAndHealth[i]!.burnedEnergy.toDouble(),
           ),
         );
+      } else {
+        barData.add(
+          Bar(
+            xAxis: i,
+            yAxisSteps: 0,
+            yAxisCalories: 0,
+          ),
+        );
       }
     }
     return barData;

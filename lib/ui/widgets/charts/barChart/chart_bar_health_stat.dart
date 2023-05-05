@@ -17,18 +17,14 @@ class ChartsBarHealthStat extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Bar>> snapshot) {
         if (snapshot.hasData) {
           List<Bar> data = snapshot.data!;
-          return Expanded(
-            child: BarChart(
-              _barChartData(data),
-              swapAnimationDuration: const Duration(milliseconds: 150),
-              swapAnimationCurve: Curves.linear,
-            ),
+          return BarChart(
+            _barChartData(data),
+            swapAnimationDuration: const Duration(milliseconds: 150),
+            swapAnimationCurve: Curves.linear,
           );
         } else {
-          return const Expanded(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
+          return const Center(
+            child: CircularProgressIndicator(),
           );
         }
       },

@@ -71,7 +71,6 @@ class PersonalViewModel {
     await _getSteps();
 
     await _saveToDB();
-
     await _saveToShared();
   }
 

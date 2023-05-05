@@ -44,15 +44,16 @@ class _Statistics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return ListView(
       children: [
-        Text(
-          'Статистика активности',
-          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+        Center(
+          child: Text(
+            'Статистика активности',
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+          ),
         ),
         const SizedBox(height: AppPaddings.hight),
         FutureBuilder(
@@ -83,8 +84,20 @@ class _Statistics extends StatelessWidget {
             );
           },
         ),
+        const SizedBox(height: AppPaddings.hight),
+        Center(
+          child: Text(
+            'График активности за неделю',
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
+        ),
         const SizedBox(height: AppPaddings.hight * 2),
-        const ChartsBarHealthStat(),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 200),
+          child: const ChartsBarHealthStat(),
+        ),
       ],
     );
   }

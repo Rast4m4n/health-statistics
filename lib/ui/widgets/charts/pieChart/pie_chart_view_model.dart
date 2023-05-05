@@ -24,8 +24,6 @@ class PieChartViewModel {
   int userWithBadActivity = 0;
   int userWithGoodActivity = 0;
 
-  final _emails = <String>[];
-
   Future<void> fetchDataFromDB() async {
     final repo = HealthStatisticsRepository(
       healthApi: HealthApi(),
