@@ -1,7 +1,9 @@
-import 'package:health_statistics/data/api/services/health_statistics_api.dart';
+import 'package:health_statistics/data/api/services/health_api.dart';
+import 'package:health_statistics/data/api/services/user_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
 import 'package:health_statistics/domain/enums/gender_enum.dart';
 import 'package:health_statistics/domain/models/health_model.dart';
+import 'package:health_statistics/domain/models/user_model.dart';
 
 class PieChartViewModel {
   PieChartViewModel();
@@ -25,40 +27,40 @@ class PieChartViewModel {
   final _emails = <String>[];
 
   Future<void> fetchDataFromDB() async {
-    final repo = HealthStatisticsRepository(healthApi: HealthStatisticApi());
-    final data = await repo.fetchHealthData();
-    data.sort(
-      (a, b) => a.dateTimeActivity.compareTo(b.dateTimeActivity),
+    final repo = HealthStatisticsRepository(
+      healthApi: HealthApi(),
+      userApi: UserApi(),
     );
-    final sortedData = data;
-    for (var health in sortedData) {
-      if (!_emails.contains(health.email)) {
-        _emails.add(health.email!);
-        _getCountUsersByGender(health);
-        _getCountUsersByAge(health);
-        _getUserByLessActivity(health);
-        _getUserByMinutesActivity(health);
-      }
+    final healthData = await repo.fetchHealthData();
+    final usersData = await repo.fetchUserData();
+
+    for (var user in usersData) {
+      _getCountUsersByGender(user);
+      _getCountUsersByAge(user);
     }
-    totalQuantity = _emails.length;
+    for (var health in healthData) {
+      _getUserByLessActivity(health);
+      _getUserByMinutesActivity(health);
+    }
+    totalQuantity = healthData.length;
   }
 
-  void _getCountUsersByGender(HealthModel health) {
-    if (health.gender == GenderEnum.male.nameGender) {
+  void _getCountUsersByGender(UserModel user) {
+    if (user.gender == GenderEnum.male.nameGender) {
       quantityMen += 1;
-    } else if (health.gender == GenderEnum.female.nameGender) {
+    } else if (user.gender == GenderEnum.female.nameGender) {
       quantityWomen += 1;
     }
   }
 
-  void _getCountUsersByAge(HealthModel health) {
-    if (health.age! < 18) {
+  void _getCountUsersByAge(UserModel user) {
+    if (user.age < 18) {
       userOlderLow += 1;
-    } else if (health.age! >= 18 && health.age! <= 30) {
+    } else if (user.age >= 18 && user.age <= 30) {
       userOlderMedium += 1;
-    } else if (health.age! >= 30 && health.age! <= 60) {
+    } else if (user.age >= 30 && user.age <= 60) {
       userOlderHight += 1;
-    } else if (health.age! > 60) {
+    } else if (user.age > 60) {
       userOlderExtraHight += 1;
     }
   }
