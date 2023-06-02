@@ -7,6 +7,7 @@ import 'package:health_statistics/domain/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class UserApi {
+  const UserApi();
   Future<void> saveUserData(UserModel userData) async {
     final users = await fetchUserData();
     final currentUser = (await SharedPrefRepository.instance.getUserData())!;
@@ -32,7 +33,7 @@ class UserApi {
     } on SocketException catch (e) {
       throw Exception('Сетевая ошибка: $e');
     } catch (e) {
-      throw Exception('Общая ошибка');
+      throw Exception('Общая ошибка: $e');
     }
   }
 
@@ -50,7 +51,7 @@ class UserApi {
             'Данные пользователя не сохранены: статус код ${response.statusCode}');
       }
     } catch (e) {
-      throw Exception('Ошибка сохранения данных');
+      throw Exception('Ошибка сохранения данных: $e');
     }
   }
 
@@ -71,7 +72,7 @@ class UserApi {
             'Ошибка изменения данных пользователя: ${response.statusCode}');
       }
     } catch (e) {
-      throw Exception('Ошибка изменения данных');
+      throw Exception('Ошибка изменения данных: $e');
     }
   }
 }

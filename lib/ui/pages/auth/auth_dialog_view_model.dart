@@ -10,13 +10,13 @@ import 'package:health_statistics/ui/navigations/app_navigation.dart';
 
 class AuthDialogVIewModel {
   final TextEditingController textAge;
-  GenderEnum? gender;
+  final GenderEnum? gender;
 
-  AuthDialogVIewModel({required this.textAge, required this.gender});
+  const AuthDialogVIewModel({required this.textAge, required this.gender});
 
   Future<void> saveData(BuildContext context) async {
     final accountGoogle = AuthGoogle();
-    final repo = HealthStatisticsRepository(
+    const repo = HealthStatisticsRepository(
       healthApi: HealthApi(),
       userApi: UserApi(),
     );

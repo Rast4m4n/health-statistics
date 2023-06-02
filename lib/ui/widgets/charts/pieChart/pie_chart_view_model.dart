@@ -9,7 +9,7 @@ import 'package:health_statistics/domain/models/user_model.dart';
 class PieChartViewModel {
   PieChartViewModel();
 
-  final _repo = HealthStatisticsRepository(
+  final _repo = const HealthStatisticsRepository(
     healthApi: HealthApi(),
     userApi: UserApi(),
   );

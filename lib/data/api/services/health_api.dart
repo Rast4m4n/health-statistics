@@ -8,6 +8,7 @@ import 'package:health_statistics/domain/models/health_model.dart';
 import 'package:http/http.dart' as http;
 
 class HealthApi {
+  const HealthApi();
   Future<void> saveHealthData(HealthModel healthData) async {
     final health = await fetchHealthData();
     final currentUser = (await SharedPrefRepository.instance.getUserData())!;
