@@ -5,6 +5,8 @@ abstract class AppColors {
   static const Color skyBlue = Color(0xff92BDFF);
   static const Color purple = Color(0xffBF98FF);
   static const Color green = Color.fromARGB(255, 118, 255, 116);
+  static const Color grey = Color(0xffF6F6F6);
+  static const Color white = Color(0xffFFFFFF);
 }
 
 class AppTheme {
