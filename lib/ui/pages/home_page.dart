@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_statistics/ui/pages/general/general_statistic_page.dart';
 import 'package:health_statistics/ui/pages/personal/personal_statistic_page.dart';
+import 'package:health_statistics/ui/pages/record/record_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +14,7 @@ class _HomePageState extends State<HomePage> {
   static final List<StatelessWidget> _page = [
     PersonalStatisticPage(),
     const GeneralStatisticPage(),
+    const RecordPage(),
   ];
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
@@ -24,7 +26,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _page.elementAt(_selectedIndex),
+      body: SafeArea(
+        child: _page.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
@@ -34,6 +38,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.show_chart),
             label: 'Общие показатели',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_walk),
+            label: 'Таблица рекордов',
           ),
         ],
         currentIndex: _selectedIndex,
