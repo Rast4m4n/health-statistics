@@ -9,91 +9,89 @@ class GeneralStatisticPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(AppPaddings.low),
-            child: Center(
-              child: Text(
-                'Общая статистика',
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(AppPaddings.low),
+          child: Center(
+            child: Text(
+              'Общая статистика',
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppPaddings.hight),
+          child: Text(
+            'Пользователей в приложении',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Colors.black,
+                ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: AppPaddings.low),
+        const _ChartByQuantityUsers(),
+        const SizedBox(height: AppPaddings.hight),
+        const _ChartByUserOlder(),
+        const SizedBox(height: AppPaddings.low),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppPaddings.hight),
+          child: Text(
+            'Рекомендуемая активность в день',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Colors.black,
+                ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: AppPaddings.low),
+        Padding(
+          padding: const EdgeInsets.only(left: AppPaddings.low),
+          child: Column(
+            children: [
+              Text(
+                'Рекомендуемое время аэробной активности в день - 75 минут.',
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-            ),
+              const SizedBox(height: AppPaddings.low),
+              Text(
+                'Рекомендуемое время аэробной активности в неделю - 150-300 минут.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.hight),
-            child: Text(
-              'Пользователей в приложении',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.black,
-                  ),
-              textAlign: TextAlign.center,
-            ),
+        ),
+        const SizedBox(height: AppPaddings.low),
+        const _ChartByDeficiencyActivity(),
+        const SizedBox(height: AppPaddings.low),
+        Padding(
+          padding: const EdgeInsets.only(left: AppPaddings.low),
+          child: Column(
+            children: [
+              Text(
+                'Рекомендуемое количество шагов в день малоподвижному человеку до 3 тысяч шагов.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const SizedBox(height: AppPaddings.low),
+              Text(
+                'Рекомендуемое количество шагов в день здоровому взрослому человеку - 10 тысяч шагов',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const SizedBox(height: AppPaddings.low),
+              Text(
+                'Рекомендуемое количество шагов в день физически активному человеку - 20 тысяч шагов и более',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
           ),
-          const SizedBox(height: AppPaddings.low),
-          const _ChartByQuantityUsers(),
-          const SizedBox(height: AppPaddings.hight),
-          const _ChartByUserOlder(),
-          const SizedBox(height: AppPaddings.low),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppPaddings.hight),
-            child: Text(
-              'Рекомендуемая активность в день',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.black,
-                  ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: AppPaddings.low),
-          Padding(
-            padding: const EdgeInsets.only(left: AppPaddings.low),
-            child: Column(
-              children: [
-                Text(
-                  'Рекомендуемое время аэробной активности в день - 75 минут.',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                const SizedBox(height: AppPaddings.low),
-                Text(
-                  'Рекомендуемое время аэробной активности в неделю - 150-300 минут.',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppPaddings.low),
-          const _ChartByDeficiencyActivity(),
-          const SizedBox(height: AppPaddings.low),
-          Padding(
-            padding: const EdgeInsets.only(left: AppPaddings.low),
-            child: Column(
-              children: [
-                Text(
-                  'Рекомендуемое количество шагов в день малоподвижному человеку до 3 тысяч шагов.',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                const SizedBox(height: AppPaddings.low),
-                Text(
-                  'Рекомендуемое количество шагов в день здоровому взрослому человеку - 10 тысяч шагов',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                const SizedBox(height: AppPaddings.low),
-                Text(
-                  'Рекомендуемое количество шагов в день физически активному человеку - 20 тысяч шагов и более',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppPaddings.low),
-          const _ChartByQuantitySteps(),
-        ],
-      ),
+        ),
+        const SizedBox(height: AppPaddings.low),
+        const _ChartByQuantitySteps(),
+      ],
     );
   }
 }

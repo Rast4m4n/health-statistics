@@ -14,7 +14,7 @@ class PersonalStatisticPage extends StatelessWidget {
   PersonalStatisticPage({
     super.key,
   });
-  final _healthRepository = HealthStatisticsRepository(
+  final _healthRepository = const HealthStatisticsRepository(
     healthApi: HealthApi(),
     userApi: UserApi(),
   );
@@ -25,19 +25,45 @@ class PersonalStatisticPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppPaddings.low),
-          child: _Statistics(vm: vm),
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(AppPaddings.low),
+      child: ListView(
+        children: [
+          Center(
+            child: Text(
+              'Статистика активности',
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+            ),
+          ),
+          const SizedBox(height: AppPaddings.hight),
+          _HealthCards(vm: vm),
+          const SizedBox(height: AppPaddings.hight),
+          const _MotivationChart(),
+          const SizedBox(height: AppPaddings.hight),
+          Center(
+            child: Text(
+              'График активности за неделю',
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ),
+          const SizedBox(height: AppPaddings.hight * 2),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 200),
+            child: const ChartsBarHealthStat(),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _Statistics extends StatelessWidget {
-  const _Statistics({
+class _HealthCards extends StatelessWidget {
+  const _HealthCards({
     super.key,
     required this.vm,
   });
@@ -46,78 +72,59 @@ class _Statistics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Center(
-          child: Text(
-            'Статистика активности',
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-          ),
-        ),
-        const SizedBox(height: AppPaddings.hight),
-        FutureBuilder(
-          future: vm.fetchDataFromGoogleFit(),
-          builder: (context, snapshot) {
-            return Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              spacing: AppPaddings.hight + AppPaddings.low,
-              runSpacing: AppPaddings.hight,
-              children: [
-                HealthCard(
-                  title: 'Шаги',
-                  statistic: '${vm.steps} шагов\n${vm.distanceMove}м. пройдено',
-                  color: AppColors.coral,
-                ),
-                HealthCard(
-                  title: 'Активность',
-                  statistic: '${vm.moveMinutes} минут',
-                  color: AppColors.skyBlue,
-                ),
-                HealthCard(
-                  title: 'Расход энергии',
-                  statistic: '${vm.eneregyBurned} калорий потрачено',
-                  color: AppColors.purple,
-                  isFullWidth: true,
-                ),
-              ],
-            );
-          },
-        ),
-        const SizedBox(height: AppPaddings.hight),
-        Column(
+    return FutureBuilder(
+      future: vm.fetchDataFromGoogleFit(),
+      builder: (context, snapshot) {
+        return Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          spacing: AppPaddings.hight + AppPaddings.low,
+          runSpacing: AppPaddings.hight,
           children: [
-            PieChartWidget(
-              statText: const [
-                TextStatistic(
-                  text: 'Вы обошли по шагам\n пользователей',
-                  color: AppColors.coral,
-                ),
-                TextStatistic(
-                  text: 'Вас обошли по шагам\n пользователей',
-                  color: AppColors.skyBlue,
-                ),
-              ],
-              pieColor: const [AppColors.coral, AppColors.skyBlue],
-              typeChart: PieChartEnum.percentMotivations,
+            HealthCard(
+              title: 'Шаги',
+              statistic: '${vm.steps} шагов\n${vm.distanceMove}м. пройдено',
+              color: AppColors.coral,
+            ),
+            HealthCard(
+              title: 'Активность',
+              statistic: '${vm.moveMinutes} минут',
+              color: AppColors.skyBlue,
+            ),
+            HealthCard(
+              title: 'Расход энергии',
+              statistic: '${vm.eneregyBurned} калорий потрачено',
+              color: AppColors.purple,
+              isFullWidth: true,
             ),
           ],
-        ),
-        const SizedBox(height: AppPaddings.hight),
-        Center(
-          child: Text(
-            'График активности за неделю',
-            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-          ),
-        ),
-        const SizedBox(height: AppPaddings.hight * 2),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxHeight: 200),
-          child: const ChartsBarHealthStat(),
+        );
+      },
+    );
+  }
+}
+
+class _MotivationChart extends StatelessWidget {
+  const _MotivationChart({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        PieChartWidget(
+          statText: const [
+            TextStatistic(
+              text: 'Вы обошли по шагам\n пользователей',
+              color: AppColors.coral,
+            ),
+            TextStatistic(
+              text: 'Вас обошли по шагам\n пользователей',
+              color: AppColors.skyBlue,
+            ),
+          ],
+          pieColor: const [AppColors.coral, AppColors.skyBlue],
+          typeChart: PieChartEnum.percentMotivations,
         ),
       ],
     );
