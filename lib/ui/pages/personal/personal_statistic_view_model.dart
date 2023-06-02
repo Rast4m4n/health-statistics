@@ -17,8 +17,8 @@ class PersonalViewModel {
   int _steps = 0;
   int get steps => _steps;
 
-  int _eneregyBurned = 0;
-  int get eneregyBurned => _eneregyBurned;
+  int? _eneregyBurned;
+  int? get eneregyBurned => _eneregyBurned;
 
   int _moveMinutes = 0;
   int get moveMinutes => _moveMinutes;
@@ -101,7 +101,7 @@ class PersonalViewModel {
         id: healthId,
         steps: steps,
         minutesWalk: _moveMinutes,
-        burnedEnergy: _eneregyBurned,
+        burnedEnergy: _eneregyBurned!,
         dateTimeActivity: DateTime.now(),
         userId: userModel.id,
       ),
