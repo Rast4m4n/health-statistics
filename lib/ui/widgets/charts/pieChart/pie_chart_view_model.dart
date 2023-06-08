@@ -3,8 +3,8 @@ import 'package:health_statistics/data/api/services/user_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
 import 'package:health_statistics/data/storage/shared_preferencese.dart';
 import 'package:health_statistics/domain/enums/gender_enum.dart';
-import 'package:health_statistics/domain/models/health_model.dart';
-import 'package:health_statistics/domain/models/user_model.dart';
+import 'package:health_statistics/domain/models/healthModel/health_model.dart';
+import 'package:health_statistics/domain/models/userModel/user_model.dart';
 
 class PieChartViewModel {
   PieChartViewModel();
@@ -21,7 +21,6 @@ class PieChartViewModel {
   int userOlderLow = 0;
   int userOlderMedium = 0;
   int userOlderHight = 0;
-  int userOlderExtraHight = 0;
 
   int userWithSmallWalk = 0;
   int userWithMediumWalk = 0;
@@ -64,8 +63,6 @@ class PieChartViewModel {
       userOlderMedium += 1;
     } else if (user.age >= 30 && user.age <= 60) {
       userOlderHight += 1;
-    } else if (user.age > 60) {
-      userOlderExtraHight += 1;
     }
   }
 

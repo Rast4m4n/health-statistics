@@ -3,9 +3,10 @@ import 'package:health_statistics/data/api/services/health_api.dart';
 import 'package:health_statistics/data/api/services/user_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
 import 'package:health_statistics/domain/enums/pie_chart_enum.dart';
+import 'package:health_statistics/domain/models/theme_switcher.dart';
 import 'package:health_statistics/ui/pages/personal/personal_statistic_view_model.dart';
+import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
-import 'package:health_statistics/ui/themes/app_theme.dart';
 import 'package:health_statistics/ui/widgets/charts/barChart/chart_bar_health_stat.dart';
 import 'package:health_statistics/ui/widgets/charts/pieChart/pie_chart_widget.dart';
 import 'package:health_statistics/ui/widgets/healthCard/health_card.dart';
@@ -29,15 +30,6 @@ class PersonalStatisticPage extends StatelessWidget {
       padding: const EdgeInsets.all(AppPaddings.low),
       child: ListView(
         children: [
-          Center(
-            child: Text(
-              'Статистика активности',
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-            ),
-          ),
           const SizedBox(height: AppPaddings.hight),
           _HealthCards(vm: vm),
           const SizedBox(height: AppPaddings.hight),
@@ -81,19 +73,17 @@ class _HealthCards extends StatelessWidget {
           runSpacing: AppPaddings.hight,
           children: [
             HealthCard(
-              title: 'Шаги',
-              statistic: '${vm.steps} шагов\n${vm.distanceMove}м. пройдено',
-              color: AppColors.coral,
-            ),
+                title: 'Шаги',
+                statistic: '${vm.steps} шагов\n${vm.distanceMove}м. пройдено',
+                color: AppColors.steps),
             HealthCard(
-              title: 'Активность',
-              statistic: '${vm.moveMinutes} минут',
-              color: AppColors.skyBlue,
-            ),
+                title: 'Активность',
+                statistic: '${vm.moveMinutes} минут',
+                color: AppColors.activity),
             HealthCard(
               title: 'Расход энергии',
               statistic: '${vm.eneregyBurned} калорий потрачено',
-              color: AppColors.purple,
+              color: AppColors.burnedEnergy,
               isFullWidth: true,
             ),
           ],
@@ -113,17 +103,20 @@ class _MotivationChart extends StatelessWidget {
     return Column(
       children: [
         PieChartWidget(
-          statText: const [
+          statText: [
             TextStatistic(
               text: 'Вы обошли по шагам\n пользователей',
-              color: AppColors.coral,
+              color: AppColors.steps,
             ),
             TextStatistic(
               text: 'Вас обошли по шагам\n пользователей',
-              color: AppColors.skyBlue,
+              color: AppColors.activity,
             ),
           ],
-          pieColor: const [AppColors.coral, AppColors.skyBlue],
+          pieColor: [
+            AppColors.steps,
+            AppColors.activity,
+          ],
           typeChart: PieChartEnum.percentMotivations,
         ),
       ],

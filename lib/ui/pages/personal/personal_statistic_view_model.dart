@@ -2,8 +2,8 @@ import 'package:health/health.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
 import 'package:health_statistics/data/storage/shared_preferencese.dart';
 import 'package:health_statistics/domain/auth.dart';
-import 'package:health_statistics/domain/models/health_model.dart';
-import 'package:health_statistics/domain/models/user_model.dart';
+import 'package:health_statistics/domain/models/healthModel/health_model.dart';
+import 'package:health_statistics/domain/models/userModel/user_model.dart';
 
 class PersonalViewModel {
   PersonalViewModel({

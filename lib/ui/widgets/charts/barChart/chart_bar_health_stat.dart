@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:health_statistics/ui/themes/app_theme.dart';
+import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/widgets/charts/barChart/chart_bar_view_model.dart';
 
 class ChartsBarHealthStat extends StatelessWidget {
@@ -44,11 +44,11 @@ class ChartsBarHealthStat extends StatelessWidget {
               barRods: [
                 BarChartRodData(
                   toY: e.yAxisSteps,
-                  color: AppColors.coral,
+                  color: AppColors.steps,
                 ),
                 BarChartRodData(
                   toY: e.yAxisCalories!,
-                  color: AppColors.purple,
+                  color: AppColors.burnedEnergy,
                 ),
               ],
             ),

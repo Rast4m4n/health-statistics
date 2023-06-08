@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:health_statistics/data/storage/shared_preferencese.dart';
-import 'package:health_statistics/domain/models/health_model.dart';
+import 'package:health_statistics/domain/models/healthModel/health_model.dart';
 
 class ChartBarViewModel {
   ChartBarViewModel();

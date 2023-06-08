@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:health_statistics/domain/models/theme_switcher.dart';
 import 'package:health_statistics/ui/navigations/app_navigation.dart';
-import 'package:health_statistics/ui/themes/app_theme.dart';
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key, required this.navigation, required this.theme});
+class App extends StatefulWidget {
+  const App({super.key, required this.navigation});
   final AppNavigation navigation;
-  final AppTheme theme;
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
+  void initState() {
+    super.initState();
+    ThemeSwitcher.instance.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme.theme,
+      theme: ThemeSwitcher.instance.currentTheme(),
       debugShowCheckedModeBanner: false,
-      initialRoute: navigation.initialRoute,
-      routes: navigation.routes,
+      initialRoute: widget.navigation.initialRoute,
+      routes: widget.navigation.routes,
     );
   }
 }

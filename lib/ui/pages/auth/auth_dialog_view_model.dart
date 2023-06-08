@@ -5,7 +5,7 @@ import 'package:health_statistics/data/repository/health_statistics_repository.d
 import 'package:health_statistics/data/storage/shared_preferencese.dart';
 import 'package:health_statistics/domain/auth.dart';
 import 'package:health_statistics/domain/enums/gender_enum.dart';
-import 'package:health_statistics/domain/models/user_model.dart';
+import 'package:health_statistics/domain/models/userModel/user_model.dart';
 import 'package:health_statistics/ui/navigations/app_navigation.dart';
 
 class AuthDialogVIewModel {

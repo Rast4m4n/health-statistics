@@ -3,8 +3,8 @@ import 'package:health_statistics/data/api/services/health_api.dart';
 import 'package:health_statistics/data/api/services/user_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
 import 'package:health_statistics/ui/pages/record/record_view_model.dart';
+import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
-import 'package:health_statistics/ui/themes/app_theme.dart';
 
 class RecordPage extends StatelessWidget {
   const RecordPage({super.key});
@@ -21,21 +21,11 @@ class RecordPage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            Center(
-              child: Text(
-                'Таблица рекордов',
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-              ),
-            ),
-            const SizedBox(height: AppPaddings.low),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPaddings.low),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: AppColors.grey,
+                  color: AppColors.tableBackground,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListRecords(vm: vm),

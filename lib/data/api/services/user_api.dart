@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:health_statistics/data/api/config/config_api.dart';
 import 'package:health_statistics/data/storage/shared_preferencese.dart';
-import 'package:health_statistics/domain/models/user_model.dart';
+import 'package:health_statistics/domain/models/userModel/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class UserApi {

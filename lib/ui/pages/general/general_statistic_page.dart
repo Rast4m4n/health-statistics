@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_statistics/domain/enums/pie_chart_enum.dart';
+import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
-import 'package:health_statistics/ui/themes/app_theme.dart';
 import 'package:health_statistics/ui/widgets/charts/pieChart/pie_chart_widget.dart';
 
 class GeneralStatisticPage extends StatelessWidget {
@@ -12,24 +12,10 @@ class GeneralStatisticPage extends StatelessWidget {
     return ListView(
       children: [
         Padding(
-          padding: const EdgeInsets.all(AppPaddings.low),
-          child: Center(
-            child: Text(
-              'Общая статистика',
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-            ),
-          ),
-        ),
-        Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppPaddings.hight),
           child: Text(
             'Пользователей в приложении',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Colors.black,
-                ),
+            style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
         ),
@@ -42,9 +28,7 @@ class GeneralStatisticPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: AppPaddings.hight),
           child: Text(
             'Рекомендуемая активность в день',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Colors.black,
-                ),
+            style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
         ),
@@ -107,15 +91,15 @@ class _ChartByQuantityUsers extends StatelessWidget {
       children: [
         PieChartWidget(
           typeChart: PieChartEnum.countUsers,
-          pieColor: const [AppColors.skyBlue, AppColors.coral],
-          statText: const [
+          pieColor: [AppColors.activity, AppColors.steps],
+          statText: [
             TextStatistic(
-              color: AppColors.skyBlue,
+              color: AppColors.activity,
               text: 'Кол-во пользователей\n мужского пола',
             ),
-            SizedBox(height: AppPaddings.medium),
+            const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.coral,
+              color: AppColors.steps,
               text: 'Кол-во пользователей\n женского пола',
             ),
           ],
@@ -134,31 +118,25 @@ class _ChartByUserOlder extends StatelessWidget {
       children: [
         PieChartWidget(
           typeChart: PieChartEnum.countUsersByAge,
-          pieColor: const [
-            AppColors.skyBlue,
-            AppColors.coral,
-            AppColors.purple,
-            AppColors.green,
+          pieColor: [
+            AppColors.activity,
+            AppColors.steps,
+            AppColors.burnedEnergy,
           ],
-          statText: const [
+          statText: [
             TextStatistic(
-              color: AppColors.skyBlue,
+              color: AppColors.activity,
               text: 'Кол-во пользователей\n младше 18',
             ),
-            SizedBox(height: AppPaddings.medium),
+            const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.coral,
+              color: AppColors.steps,
               text: 'Кол-во пользователей\n старше 18',
             ),
-            SizedBox(height: AppPaddings.medium),
+            const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.purple,
+              color: AppColors.burnedEnergy,
               text: 'Кол-во пользователей\n старше 30',
-            ),
-            SizedBox(height: AppPaddings.medium),
-            TextStatistic(
-              color: AppColors.green,
-              text: 'Кол-во пользователей\n старше 60',
             ),
           ],
         ),
@@ -176,18 +154,18 @@ class _ChartByDeficiencyActivity extends StatelessWidget {
       children: [
         PieChartWidget(
           typeChart: PieChartEnum.countUsersByActivity,
-          pieColor: const [
-            AppColors.skyBlue,
-            AppColors.coral,
+          pieColor: [
+            AppColors.activity,
+            AppColors.steps,
           ],
-          statText: const [
+          statText: [
             TextStatistic(
-              color: AppColors.skyBlue,
+              color: AppColors.activity,
               text: 'Пользователей с\n активностью меньше\n 75 минут',
             ),
-            SizedBox(height: AppPaddings.medium),
+            const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.coral,
+              color: AppColors.steps,
               text: 'Пользователей с\n активностью больше\n 75 минут',
             ),
           ],
@@ -206,24 +184,24 @@ class _ChartByQuantitySteps extends StatelessWidget {
       children: [
         PieChartWidget(
           typeChart: PieChartEnum.countUsersByQuantitySteps,
-          pieColor: const [
-            AppColors.skyBlue,
-            AppColors.coral,
-            AppColors.purple,
+          pieColor: [
+            AppColors.activity,
+            AppColors.steps,
+            AppColors.burnedEnergy,
           ],
-          statText: const [
+          statText: [
             TextStatistic(
-              color: AppColors.skyBlue,
+              color: AppColors.activity,
               text: 'Пользователей с кол-вом\n шагов до 3тыс.',
             ),
-            SizedBox(height: AppPaddings.medium),
+            const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.coral,
+              color: AppColors.steps,
               text: 'Пользователей с кол-вом\n шагов до 10тыс.',
             ),
-            SizedBox(height: AppPaddings.medium),
+            const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.purple,
+              color: AppColors.burnedEnergy,
               text: 'Пользователей с кол-вом\n шагов до 20тыс.\n и больше.',
             ),
           ],

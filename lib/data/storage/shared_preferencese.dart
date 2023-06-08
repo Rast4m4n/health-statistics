@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import 'package:health_statistics/domain/models/health_model.dart';
-import 'package:health_statistics/domain/models/user_model.dart';
+import 'package:health_statistics/domain/models/healthModel/health_model.dart';
+import 'package:health_statistics/domain/models/userModel/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class _KeysStorage {
   static const userKey = 'userKey';
   static const healthKey = 'healthKey';
+  static const themeDataKey = 'themeDataKey';
 }
 
 class SharedPrefRepository {
@@ -74,5 +75,14 @@ class SharedPrefRepository {
     for (var health in healths) {
       await saveHealthData(health);
     }
+  }
+
+  // ------------------------THEME-----------------------
+  Future<void> saveThemeData(bool isDark) async => await (await prefs).setBool(
+        _KeysStorage.themeDataKey,
+        isDark,
+      );
+  Future<bool> getThemeData() async {
+    return (await prefs).getBool(_KeysStorage.themeDataKey) ?? false;
   }
 }

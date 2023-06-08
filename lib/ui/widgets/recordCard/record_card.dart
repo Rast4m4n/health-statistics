@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
-import 'package:health_statistics/ui/themes/app_theme.dart';
 
 class RecordCard extends StatelessWidget {
   const RecordCard({
@@ -24,7 +24,7 @@ class RecordCard extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: AppColors.white,
+          color: Theme.of(context).scaffoldBackgroundColor,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -51,7 +51,7 @@ class RecordCard extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium
-                        ?.copyWith(color: AppColors.coral),
+                        ?.copyWith(color: AppColors.steps),
                   ),
                 ],
               ),

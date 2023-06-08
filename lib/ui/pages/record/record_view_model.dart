@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
-import 'package:health_statistics/domain/models/health_model.dart';
+import 'package:health_statistics/domain/models/healthModel/health_model.dart';
 import 'package:health_statistics/ui/widgets/recordCard/record_card.dart';
 
 class RecordViewModel {

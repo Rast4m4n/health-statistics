@@ -109,12 +109,6 @@ class PieChartWidget extends StatelessWidget {
           color: pieColor[2],
           titleStyle: textStyle,
         ),
-        PieChartSectionData(
-          value: vm.userOlderExtraHight.toDouble(),
-          title: vm.userOlderExtraHight.toString(),
-          color: pieColor[3],
-          titleStyle: textStyle,
-        ),
       ];
     } else if (typeChart == PieChartEnum.countUsersByQuantitySteps) {
       pieChartUsers = [
