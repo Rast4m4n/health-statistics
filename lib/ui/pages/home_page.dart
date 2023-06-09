@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   String titleName() {
     switch (_selectedIndex) {
       case 0:
-        return 'личная статистика';
+        return 'Личная статистика';
       case 1:
         return 'Общая статистика';
       case 2:

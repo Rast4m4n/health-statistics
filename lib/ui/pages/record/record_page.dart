@@ -53,6 +53,7 @@ class ListRecords extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final recordList = snapshot.data!;
+
           return Column(
             children: recordList,
           );
