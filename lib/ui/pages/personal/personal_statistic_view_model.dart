@@ -4,6 +4,7 @@ import 'package:health_statistics/data/storage/shared_preferencese.dart';
 import 'package:health_statistics/domain/auth.dart';
 import 'package:health_statistics/domain/models/healthModel/health_model.dart';
 import 'package:health_statistics/domain/models/userModel/user_model.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PersonalViewModel {
   PersonalViewModel({
@@ -28,14 +29,14 @@ class PersonalViewModel {
 
   final HealthFactory _health = HealthFactory();
 
-  final _types = [
+  final _types = const [
     HealthDataType.STEPS,
     HealthDataType.MOVE_MINUTES,
     HealthDataType.ACTIVE_ENERGY_BURNED,
     HealthDataType.DISTANCE_DELTA,
   ];
 
-  final _permission = [
+  final _permission = const [
     HealthDataAccess.READ,
     HealthDataAccess.READ,
     HealthDataAccess.READ,
@@ -45,6 +46,8 @@ class PersonalViewModel {
   final _now = DateTime.now();
 
   Future<void> fetchDataFromGoogleFit() async {
+    await _checkStatusPermission();
+
     bool requested = await _health.requestAuthorization(
       _types,
       permissions: _permission,
@@ -72,6 +75,16 @@ class PersonalViewModel {
 
     await _saveToDB();
     await _saveToShared();
+  }
+
+  Future<void> _checkStatusPermission() async {
+    var statusActivity = await Permission.activityRecognition.status;
+    var statusLocation = await Permission.location.status;
+
+    if (statusActivity.isDenied || statusLocation.isDenied) {
+      await Permission.activityRecognition.request();
+      await Permission.location.request();
+    }
   }
 
   Future<void> _saveToDB() async {

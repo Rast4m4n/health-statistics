@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_statistics/data/storage/shared_preferencese.dart';
 import 'package:health_statistics/ui/themes/app_theme.dart';
 
-class ThemeSwitcher extends ChangeNotifier {
+class ThemeSwitcher with ChangeNotifier {
   static ThemeSwitcher? _singleTon;
   static ThemeSwitcher get instance => _singleTon!;
 

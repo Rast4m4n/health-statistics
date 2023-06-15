@@ -22,6 +22,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Статистика активности',
       theme: ThemeSwitcher.instance.currentTheme(),
       debugShowCheckedModeBanner: false,
       initialRoute: widget.navigation.initialRoute,

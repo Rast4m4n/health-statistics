@@ -3,7 +3,6 @@ import 'package:health_statistics/data/api/services/health_api.dart';
 import 'package:health_statistics/data/api/services/user_api.dart';
 import 'package:health_statistics/data/repository/health_statistics_repository.dart';
 import 'package:health_statistics/domain/enums/pie_chart_enum.dart';
-import 'package:health_statistics/domain/models/theme_switcher.dart';
 import 'package:health_statistics/ui/pages/personal/personal_statistic_view_model.dart';
 import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
@@ -108,6 +107,7 @@ class _MotivationChart extends StatelessWidget {
               text: 'Вы обошли по шагам\n пользователей',
               color: AppColors.steps,
             ),
+            const SizedBox(height: AppPaddings.low),
             TextStatistic(
               text: 'Вас обошли по шагам\n пользователей',
               color: AppColors.activity,
