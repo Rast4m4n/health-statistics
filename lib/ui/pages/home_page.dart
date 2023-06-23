@@ -46,18 +46,19 @@ class _HomePageState extends State<HomePage> {
           titleName(),
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        actions: [
-          IconButton(
-            splashRadius: 18,
-            splashColor:
-                ThemeSwitcher.isDark ? AppColors.white : AppColors.bgDark,
-            color: ThemeSwitcher.isDark ? AppColors.bgDark : AppColors.white,
-            onPressed: ThemeSwitcher.instance.switchTheme,
-            icon: ThemeSwitcher.isDark
-                ? const Icon(Icons.dark_mode, color: AppColors.white)
-                : const Icon(Icons.light_mode, color: AppColors.bgDark),
-          ),
-        ],
+        // Смена темы приложения
+        // actions: [
+        //   IconButton(
+        //     splashRadius: 18,
+        //     splashColor:
+        //         ThemeSwitcher.isDark ? AppColors.white : AppColors.bgDark,
+        //     color: ThemeSwitcher.isDark ? AppColors.bgDark : AppColors.white,
+        //     onPressed: ThemeSwitcher.instance.switchTheme,
+        //     icon: ThemeSwitcher.isDark
+        //         ? const Icon(Icons.dark_mode, color: AppColors.white)
+        //         : const Icon(Icons.light_mode, color: AppColors.bgDark),
+        //   ),
+        // ],
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(

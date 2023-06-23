@@ -11,7 +11,6 @@ class PersonalViewModel {
     required this.healthRepository,
   });
   final HealthStatisticsRepository healthRepository;
-  late HealthModel healthModel;
   List<HealthDataPoint> _healthData = [];
   final _googleUser = AuthGoogle();
 
