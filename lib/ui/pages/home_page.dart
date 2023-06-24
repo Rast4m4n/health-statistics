@@ -13,10 +13,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<StatelessWidget> _page = [
+  final List<Widget> _page = const [
     PersonalStatisticPage(),
-    const GeneralStatisticPage(),
-    const RecordPage(),
+    GeneralStatisticPage(),
+    RecordPage(),
   ];
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
@@ -47,18 +47,18 @@ class _HomePageState extends State<HomePage> {
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         // Смена темы приложения
-        // actions: [
-        //   IconButton(
-        //     splashRadius: 18,
-        //     splashColor:
-        //         ThemeSwitcher.isDark ? AppColors.white : AppColors.bgDark,
-        //     color: ThemeSwitcher.isDark ? AppColors.bgDark : AppColors.white,
-        //     onPressed: ThemeSwitcher.instance.switchTheme,
-        //     icon: ThemeSwitcher.isDark
-        //         ? const Icon(Icons.dark_mode, color: AppColors.white)
-        //         : const Icon(Icons.light_mode, color: AppColors.bgDark),
-        //   ),
-        // ],
+        actions: [
+          IconButton(
+            splashRadius: 18,
+            splashColor:
+                ThemeSwitcher.isDark ? AppColors.white : AppColors.bgDark,
+            color: ThemeSwitcher.isDark ? AppColors.bgDark : AppColors.white,
+            onPressed: ThemeSwitcher.instance.switchTheme,
+            icon: ThemeSwitcher.isDark
+                ? const Icon(Icons.dark_mode, color: AppColors.white)
+                : const Icon(Icons.light_mode, color: AppColors.bgDark),
+          ),
+        ],
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(

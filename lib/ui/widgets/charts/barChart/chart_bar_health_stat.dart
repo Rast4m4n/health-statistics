@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:health_statistics/domain/models/theme_switcher.dart';
 import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/widgets/charts/barChart/chart_bar_view_model.dart';
 
@@ -11,7 +12,7 @@ class ChartsBarHealthStat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ChartBarViewModel barData = ChartBarViewModel();
-
+    Theme.of(context);
     return FutureBuilder<List<Bar>>(
       future: barData.fetchDataFromDB(),
       builder: (BuildContext context, AsyncSnapshot<List<Bar>> snapshot) {
@@ -109,8 +110,8 @@ class ChartsBarHealthStat extends StatelessWidget {
       space: 4,
       child: Text(
         text,
-        style: const TextStyle(
-          color: Colors.black,
+        style: TextStyle(
+          color: ThemeSwitcher.isDark ? AppColors.white : AppColors.black,
           fontSize: 14,
         ),
       ),

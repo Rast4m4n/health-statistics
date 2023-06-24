@@ -87,6 +87,8 @@ class _ChartByQuantityUsers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Theme.of(context);
+
     return Column(
       children: [
         PieChartWidget(
@@ -114,6 +116,8 @@ class _ChartByUserOlder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Theme.of(context);
+
     return Column(
       children: [
         PieChartWidget(
@@ -150,6 +154,8 @@ class _ChartByDeficiencyActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Theme.of(context);
+
     return Column(
       children: [
         PieChartWidget(
@@ -180,6 +186,8 @@ class _ChartByQuantitySteps extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Theme.of(context);
+
     return Column(
       children: [
         PieChartWidget(

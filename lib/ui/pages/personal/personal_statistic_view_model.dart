@@ -44,9 +44,14 @@ class PersonalViewModel {
 
   final _now = DateTime.now();
 
-  Future<void> fetchDataFromGoogleFit() async {
-    await _checkStatusPermission();
+  Future<void>? fetchDataFuture;
 
+  void init() {
+    fetchDataFuture = fetchDataFromGoogleFit();
+    checkAndRequestStatusPermission();
+  }
+
+  Future<void> fetchDataFromGoogleFit() async {
     bool requested = await _health.requestAuthorization(
       _types,
       permissions: _permission,
@@ -76,7 +81,7 @@ class PersonalViewModel {
     await _saveToShared();
   }
 
-  Future<void> _checkStatusPermission() async {
+  Future<void> checkAndRequestStatusPermission() async {
     var statusActivity = await Permission.activityRecognition.status;
     var statusLocation = await Permission.location.status;
 

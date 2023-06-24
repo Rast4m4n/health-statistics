@@ -45,7 +45,6 @@ class RecordViewModel {
     }
 
     for (var health in healths) {
-      print(health.steps);
       if (health.userId == currentUser.id) {
         if (healths.indexOf(health) >= topUser.length) {
           recordCards.add(const Icon(Icons.more_horiz));

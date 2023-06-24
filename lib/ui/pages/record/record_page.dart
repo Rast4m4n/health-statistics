@@ -16,6 +16,7 @@ class RecordPage extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
+    Theme.of(context);
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),

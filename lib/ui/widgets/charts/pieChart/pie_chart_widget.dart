@@ -4,8 +4,8 @@ import 'package:health_statistics/domain/enums/pie_chart_enum.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
 import 'package:health_statistics/ui/widgets/charts/pieChart/pie_chart_view_model.dart';
 
-class PieChartWidget extends StatelessWidget {
-  PieChartWidget({
+class PieChartWidget extends StatefulWidget {
+  const PieChartWidget({
     super.key,
     required this.statText,
     required this.pieColor,
@@ -15,6 +15,12 @@ class PieChartWidget extends StatelessWidget {
   final List<Widget> statText;
   final List<Color> pieColor;
   final PieChartEnum typeChart;
+
+  @override
+  State<PieChartWidget> createState() => _PieChartWidgetState();
+}
+
+class _PieChartWidgetState extends State<PieChartWidget> {
   final vm = PieChartViewModel();
 
   @override
@@ -56,7 +62,7 @@ class PieChartWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ...statText,
+                  ...widget.statText,
                 ],
               ),
             ],
@@ -74,89 +80,89 @@ class PieChartWidget extends StatelessWidget {
           color: Colors.white,
         );
     List<PieChartSectionData> pieChartUsers = [];
-    if (typeChart == PieChartEnum.countUsers) {
+    if (widget.typeChart == PieChartEnum.countUsers) {
       pieChartUsers = [
         PieChartSectionData(
           value: vm.quantityMen.toDouble(),
           title: vm.quantityMen.toString(),
-          color: pieColor[0],
+          color: widget.pieColor[0],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.quantityWomen.toDouble(),
           title: vm.quantityWomen.toString(),
-          color: pieColor[1],
+          color: widget.pieColor[1],
           titleStyle: textStyle,
         ),
       ];
-    } else if (typeChart == PieChartEnum.countUsersByAge) {
+    } else if (widget.typeChart == PieChartEnum.countUsersByAge) {
       pieChartUsers = [
         PieChartSectionData(
           value: vm.userOlderLow.toDouble(),
           title: vm.userOlderLow.toString(),
-          color: pieColor[0],
+          color: widget.pieColor[0],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.userOlderMedium.toDouble(),
           title: vm.userOlderMedium.toString(),
-          color: pieColor[1],
+          color: widget.pieColor[1],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.userOlderHight.toDouble(),
           title: vm.userOlderHight.toString(),
-          color: pieColor[2],
+          color: widget.pieColor[2],
           titleStyle: textStyle,
         ),
       ];
-    } else if (typeChart == PieChartEnum.countUsersByQuantitySteps) {
+    } else if (widget.typeChart == PieChartEnum.countUsersByQuantitySteps) {
       pieChartUsers = [
         PieChartSectionData(
           value: vm.userWithSmallWalk.toDouble(),
           title: vm.userWithSmallWalk.toString(),
-          color: pieColor[0],
+          color: widget.pieColor[0],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.userWithMediumWalk.toDouble(),
           title: vm.userWithMediumWalk.toString(),
-          color: pieColor[1],
+          color: widget.pieColor[1],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.userWithHightWalk.toDouble(),
           title: vm.userWithHightWalk.toString(),
-          color: pieColor[2],
+          color: widget.pieColor[2],
           titleStyle: textStyle,
         ),
       ];
-    } else if (typeChart == PieChartEnum.countUsersByActivity) {
+    } else if (widget.typeChart == PieChartEnum.countUsersByActivity) {
       pieChartUsers = [
         PieChartSectionData(
           value: vm.userWithBadActivity.toDouble(),
           title: vm.userWithBadActivity.toString(),
-          color: pieColor[0],
+          color: widget.pieColor[0],
           titleStyle: textStyle,
         ),
         PieChartSectionData(
           value: vm.userWithGoodActivity.toDouble(),
           title: vm.userWithGoodActivity.toString(),
-          color: pieColor[1],
+          color: widget.pieColor[1],
           titleStyle: textStyle,
         ),
       ];
-    } else if (typeChart == PieChartEnum.percentMotivations) {
+    } else if (widget.typeChart == PieChartEnum.percentMotivations) {
       pieChartUsers = [
         PieChartSectionData(
             value: vm.percentMotivations,
             title: '${vm.percentMotivations.toStringAsFixed(1)}%',
-            color: pieColor[0],
+            color: widget.pieColor[0],
             titleStyle: textStyle),
         PieChartSectionData(
             value: 100 - vm.percentMotivations,
             title: '${100 - vm.percentMotivations}%',
-            color: pieColor[1],
+            color: widget.pieColor[1],
             titleStyle: textStyle)
       ];
     }

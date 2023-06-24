@@ -10,10 +10,16 @@ import 'package:health_statistics/ui/widgets/charts/barChart/chart_bar_health_st
 import 'package:health_statistics/ui/widgets/charts/pieChart/pie_chart_widget.dart';
 import 'package:health_statistics/ui/widgets/healthCard/health_card.dart';
 
-class PersonalStatisticPage extends StatelessWidget {
-  PersonalStatisticPage({
+class PersonalStatisticPage extends StatefulWidget {
+  const PersonalStatisticPage({
     super.key,
   });
+
+  @override
+  State<PersonalStatisticPage> createState() => _PersonalStatisticPageState();
+}
+
+class _PersonalStatisticPageState extends State<PersonalStatisticPage> {
   final _healthRepository = const HealthStatisticsRepository(
     healthApi: HealthApi(),
     userApi: UserApi(),
@@ -24,13 +30,19 @@ class PersonalStatisticPage extends StatelessWidget {
   );
 
   @override
+  void initState() {
+    vm.init();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(AppPaddings.low),
       child: ListView(
         children: [
           const SizedBox(height: AppPaddings.hight),
-          _HealthCards(vm: vm),
+          const _HealthCards(),
           const SizedBox(height: AppPaddings.hight),
           const _MotivationChart(),
           const SizedBox(height: AppPaddings.hight),
@@ -56,15 +68,15 @@ class PersonalStatisticPage extends StatelessWidget {
 class _HealthCards extends StatelessWidget {
   const _HealthCards({
     super.key,
-    required this.vm,
   });
-
-  final PersonalViewModel vm;
 
   @override
   Widget build(BuildContext context) {
+    final vm =
+        context.findAncestorStateOfType<_PersonalStatisticPageState>()!.vm;
+    Theme.of(context);
     return FutureBuilder(
-      future: vm.fetchDataFromGoogleFit(),
+      future: vm.fetchDataFuture,
       builder: (context, snapshot) {
         return Wrap(
           alignment: WrapAlignment.spaceBetween,
@@ -99,6 +111,7 @@ class _MotivationChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Theme.of(context);
     return Column(
       children: [
         PieChartWidget(
