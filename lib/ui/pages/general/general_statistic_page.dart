@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_statistics/domain/enums/pie_chart_enum.dart';
-import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
+import 'package:health_statistics/ui/themes/app_theme_ext.dart';
 import 'package:health_statistics/ui/widgets/charts/pieChart/pie_chart_widget.dart';
 
 class GeneralStatisticPage extends StatelessWidget {
@@ -93,15 +93,21 @@ class _ChartByQuantityUsers extends StatelessWidget {
       children: [
         PieChartWidget(
           typeChart: PieChartEnum.countUsers,
-          pieColor: [AppColors.activity, AppColors.steps],
+          pieColor: [
+            Theme.of(context).extension<AppColorsCardExt>()!.activityColor!,
+            Theme.of(context).extension<AppColorsCardExt>()!.stepColor!,
+          ],
           statText: [
             TextStatistic(
-              color: AppColors.activity,
+              color: Theme.of(context)
+                  .extension<AppColorsCardExt>()!
+                  .activityColor,
               text: 'Кол-во пользователей\n мужского пола',
             ),
             const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.steps,
+              color:
+                  Theme.of(context).extension<AppColorsCardExt>()!.stepColor!,
               text: 'Кол-во пользователей\n женского пола',
             ),
           ],
@@ -123,23 +129,28 @@ class _ChartByUserOlder extends StatelessWidget {
         PieChartWidget(
           typeChart: PieChartEnum.countUsersByAge,
           pieColor: [
-            AppColors.activity,
-            AppColors.steps,
-            AppColors.burnedEnergy,
+            Theme.of(context).extension<AppColorsCardExt>()!.activityColor!,
+            Theme.of(context).extension<AppColorsCardExt>()!.stepColor!,
+            Theme.of(context).extension<AppColorsCardExt>()!.burnedEnergyColor!,
           ],
           statText: [
             TextStatistic(
-              color: AppColors.activity,
+              color: Theme.of(context)
+                  .extension<AppColorsCardExt>()!
+                  .activityColor!,
               text: 'Кол-во пользователей\n младше 18',
             ),
             const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.steps,
+              color:
+                  Theme.of(context).extension<AppColorsCardExt>()!.stepColor!,
               text: 'Кол-во пользователей\n старше 18',
             ),
             const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.burnedEnergy,
+              color: Theme.of(context)
+                  .extension<AppColorsCardExt>()!
+                  .burnedEnergyColor!,
               text: 'Кол-во пользователей\n старше 30',
             ),
           ],
@@ -161,17 +172,20 @@ class _ChartByDeficiencyActivity extends StatelessWidget {
         PieChartWidget(
           typeChart: PieChartEnum.countUsersByActivity,
           pieColor: [
-            AppColors.activity,
-            AppColors.steps,
+            Theme.of(context).extension<AppColorsCardExt>()!.activityColor!,
+            Theme.of(context).extension<AppColorsCardExt>()!.stepColor!,
           ],
           statText: [
             TextStatistic(
-              color: AppColors.activity,
+              color: Theme.of(context)
+                  .extension<AppColorsCardExt>()!
+                  .activityColor!,
               text: 'Пользователей с\n активностью меньше\n 75 минут',
             ),
             const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.steps,
+              color:
+                  Theme.of(context).extension<AppColorsCardExt>()!.stepColor!,
               text: 'Пользователей с\n активностью больше\n 75 минут',
             ),
           ],
@@ -193,23 +207,28 @@ class _ChartByQuantitySteps extends StatelessWidget {
         PieChartWidget(
           typeChart: PieChartEnum.countUsersByQuantitySteps,
           pieColor: [
-            AppColors.activity,
-            AppColors.steps,
-            AppColors.burnedEnergy,
+            Theme.of(context).extension<AppColorsCardExt>()!.activityColor!,
+            Theme.of(context).extension<AppColorsCardExt>()!.stepColor!,
+            Theme.of(context).extension<AppColorsCardExt>()!.burnedEnergyColor!,
           ],
           statText: [
             TextStatistic(
-              color: AppColors.activity,
+              color: Theme.of(context)
+                  .extension<AppColorsCardExt>()!
+                  .activityColor!,
               text: 'Пользователей с кол-вом\n шагов до 3тыс.',
             ),
             const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.steps,
+              color:
+                  Theme.of(context).extension<AppColorsCardExt>()!.stepColor!,
               text: 'Пользователей с кол-вом\n шагов до 10тыс.',
             ),
             const SizedBox(height: AppPaddings.medium),
             TextStatistic(
-              color: AppColors.burnedEnergy,
+              color: Theme.of(context)
+                  .extension<AppColorsCardExt>()!
+                  .burnedEnergyColor,
               text: 'Пользователей с кол-вом\n шагов до 20тыс.\n и больше.',
             ),
           ],

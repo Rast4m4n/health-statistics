@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/themes/app_paddings.dart';
+import 'package:health_statistics/ui/themes/app_theme_ext.dart';
 
 class RecordCard extends StatelessWidget {
   const RecordCard({
@@ -48,10 +48,11 @@ class RecordCard extends StatelessWidget {
                   const SizedBox(height: AppPaddings.medium),
                   Text(
                     '$steps шагов',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: AppColors.steps),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context)
+                              .extension<AppColorsCardExt>()!
+                              .stepColor!,
+                        ),
                   ),
                 ],
               ),

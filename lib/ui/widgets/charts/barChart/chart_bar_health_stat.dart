@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:health_statistics/domain/models/theme_switcher.dart';
 import 'package:health_statistics/ui/themes/app_colors.dart';
+import 'package:health_statistics/ui/themes/app_theme_ext.dart';
 import 'package:health_statistics/ui/widgets/charts/barChart/chart_bar_view_model.dart';
 
 class ChartsBarHealthStat extends StatelessWidget {
@@ -19,7 +20,7 @@ class ChartsBarHealthStat extends StatelessWidget {
         if (snapshot.hasData) {
           List<Bar> data = snapshot.data!;
           return BarChart(
-            _barChartData(data),
+            _barChartData(data, context),
             swapAnimationDuration: const Duration(milliseconds: 150),
             swapAnimationCurve: Curves.linear,
           );
@@ -32,7 +33,7 @@ class ChartsBarHealthStat extends StatelessWidget {
     );
   }
 
-  BarChartData _barChartData(List<Bar> data) {
+  BarChartData _barChartData(List<Bar> data, context) {
     return BarChartData(
       maxY: 25000,
       titlesData: _titlesData(),
@@ -45,11 +46,15 @@ class ChartsBarHealthStat extends StatelessWidget {
               barRods: [
                 BarChartRodData(
                   toY: e.yAxisSteps,
-                  color: AppColors.steps,
+                  color: Theme.of(context)
+                      .extension<AppColorsCardExt>()!
+                      .stepColor!,
                 ),
                 BarChartRodData(
                   toY: e.yAxisCalories!,
-                  color: AppColors.burnedEnergy,
+                  color: Theme.of(context)
+                      .extension<AppColorsCardExt>()!
+                      .burnedEnergyColor!,
                 ),
               ],
             ),
