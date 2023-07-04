@@ -11,24 +11,42 @@ class ChartsBarHealthStat extends StatefulWidget {
   });
 
   @override
-  State<ChartsBarHealthStat> createState() => _ChartsBarHealthStatState();
+  State<ChartsBarHealthStat> createState() => ChartsBarHealthStatState();
 }
 
-class _ChartsBarHealthStatState extends State<ChartsBarHealthStat> {
-  ChartBarViewModel barData = const ChartBarViewModel();
+class ChartsBarHealthStatState extends State<ChartsBarHealthStat>
+    with TickerProviderStateMixin {
+  late final ChartBarViewModel vm = ChartBarViewModel(
+    this,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    vm.init();
+  }
+
+  @override
+  void dispose() {
+    vm.disposeController();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     Theme.of(context);
     return FutureBuilder<List<Bar>>(
-      future: barData.fetchDataFromDB(),
+      future: vm.fetchDataFromDB(),
       builder: (BuildContext context, AsyncSnapshot<List<Bar>> snapshot) {
         if (snapshot.hasData) {
           List<Bar> data = snapshot.data!;
-          return BarChart(
-            _barChartData(data, context),
-            swapAnimationDuration: const Duration(milliseconds: 150),
-            swapAnimationCurve: Curves.linear,
+          return AnimatedBuilder(
+            animation: vm.controller,
+            builder: (BuildContext context, Widget? child) {
+              return BarChart(
+                _barChartData(data, vm.controller, context),
+              );
+            },
           );
         } else {
           return const Center(
@@ -39,7 +57,8 @@ class _ChartsBarHealthStatState extends State<ChartsBarHealthStat> {
     );
   }
 
-  BarChartData _barChartData(List<Bar> data, context) {
+  BarChartData _barChartData(
+      List<Bar> data, Animation animationValue, context) {
     return BarChartData(
       maxY: 25000,
       titlesData: _titlesData(),
@@ -51,13 +70,19 @@ class _ChartsBarHealthStatState extends State<ChartsBarHealthStat> {
               x: e.xAxis,
               barRods: [
                 BarChartRodData(
-                  toY: e.yAxisSteps,
+                  toY: animationValue
+                          .drive(CurveTween(curve: Curves.bounceInOut))
+                          .value *
+                      e.yAxisSteps,
                   color: Theme.of(context)
                       .extension<AppColorsCardExt>()!
                       .stepColor!,
                 ),
                 BarChartRodData(
-                  toY: e.yAxisCalories!,
+                  toY: animationValue
+                          .drive(CurveTween(curve: Curves.bounceInOut))
+                          .value *
+                      e.yAxisCalories!,
                   color: Theme.of(context)
                       .extension<AppColorsCardExt>()!
                       .burnedEnergyColor!,
