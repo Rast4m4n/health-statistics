@@ -47,8 +47,8 @@ class PersonalViewModel {
   Future<void>? fetchDataFuture;
 
   void init() {
-    fetchDataFuture = fetchDataFromGoogleFit();
     checkAndRequestStatusPermission();
+    fetchDataFuture = fetchDataFromGoogleFit();
   }
 
   Future<void> fetchDataFromGoogleFit() async {

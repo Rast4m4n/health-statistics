@@ -4,24 +4,23 @@ import 'package:health_statistics/data/storage/shared_preferencese.dart';
 import 'package:health_statistics/domain/models/healthModel/health_model.dart';
 
 class ChartBarViewModel {
-  ChartBarViewModel();
-
-  final List<Bar> barData = [];
-  final Map<int, HealthModel> _dayAndHealth = {};
+  const ChartBarViewModel();
 
   Future<List<Bar>> fetchDataFromDB() async {
     final healths = await SharedPrefRepository.instance.getHealthData();
+    final List<Bar> barData = [];
+    final Map<int, HealthModel> dayAndHealth = {};
 
     for (var health in healths) {
-      _dayAndHealth[health.dateTimeActivity.weekday] = health;
+      dayAndHealth[health.dateTimeActivity.weekday] = health;
     }
     for (var i = 1; i <= 7; i++) {
-      if (_dayAndHealth[i] != null) {
+      if (dayAndHealth[i] != null) {
         barData.add(
           Bar(
             xAxis: i,
-            yAxisSteps: _dayAndHealth[i]!.steps.toDouble(),
-            yAxisCalories: _dayAndHealth[i]!.burnedEnergy.toDouble(),
+            yAxisSteps: dayAndHealth[i]!.steps.toDouble(),
+            yAxisCalories: dayAndHealth[i]!.burnedEnergy.toDouble(),
           ),
         );
       } else {

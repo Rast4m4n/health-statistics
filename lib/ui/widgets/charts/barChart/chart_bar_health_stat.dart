@@ -5,14 +5,20 @@ import 'package:health_statistics/ui/themes/app_colors.dart';
 import 'package:health_statistics/ui/themes/app_theme_ext.dart';
 import 'package:health_statistics/ui/widgets/charts/barChart/chart_bar_view_model.dart';
 
-class ChartsBarHealthStat extends StatelessWidget {
+class ChartsBarHealthStat extends StatefulWidget {
   const ChartsBarHealthStat({
     super.key,
   });
 
   @override
+  State<ChartsBarHealthStat> createState() => _ChartsBarHealthStatState();
+}
+
+class _ChartsBarHealthStatState extends State<ChartsBarHealthStat> {
+  ChartBarViewModel barData = const ChartBarViewModel();
+
+  @override
   Widget build(BuildContext context) {
-    ChartBarViewModel barData = ChartBarViewModel();
     Theme.of(context);
     return FutureBuilder<List<Bar>>(
       future: barData.fetchDataFromDB(),
